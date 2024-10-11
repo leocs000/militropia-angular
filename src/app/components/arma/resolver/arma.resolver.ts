@@ -1,6 +1,6 @@
+import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { Arma } from '../../../models/arma.model';
-import { inject } from '@angular/core';
 import { ArmaService } from '../../../services/arma.service';
 
 export const armaResolver: ResolveFn<Arma> = 

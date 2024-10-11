@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Municipio } from '../models/municipio.model';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Municipio } from '../models/municipio.model';
 
 
 @Injectable({

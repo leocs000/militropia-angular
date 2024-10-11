@@ -1,17 +1,17 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Estado } from '../../../models/estado.model';
-import { MunicipioService } from '../../../services/municipio.service';
-import { EstadoService } from '../../../services/estado.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Municipio } from '../../../models/municipio.model';
-import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Estado } from '../../../models/estado.model';
+import { Municipio } from '../../../models/municipio.model';
+import { EstadoService } from '../../../services/estado.service';
+import { MunicipioService } from '../../../services/municipio.service';
 
 @Component({
   selector: 'app-municipio-form',

@@ -34,7 +34,7 @@ export class ArmaService {
       nome: arma.nome,
       idEstado: arma.estado.id
     };
-*/    
+*/
     return this.httpClient.put<Arma>(`${this.baseUrl}/${arma.id}`, arma);
   }
 

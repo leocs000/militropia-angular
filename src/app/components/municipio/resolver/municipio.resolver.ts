@@ -1,6 +1,6 @@
+import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from '@angular/router';
 import { Municipio } from '../../../models/municipio.model';
-import { inject } from '@angular/core';
 import { MunicipioService } from '../../../services/municipio.service';
 
 
