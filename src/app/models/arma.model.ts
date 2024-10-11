@@ -10,8 +10,8 @@ export class Arma {
     descricao!: string;
     tipo!: TipoArma;
     marca!: string;
-    acabamento!: Acabamento;
-    calibre!: Calibre;
+    acabamento!: string;
+    calibre!: string;
     comprimentoDoCano!: string;
     capacidadeDeTiro!: number;
     numeroSigma!: string;

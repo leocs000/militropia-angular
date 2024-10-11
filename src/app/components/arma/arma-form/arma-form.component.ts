@@ -1,10 +1,15 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { ArmaService } from '../../../services/arma.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Arma } from '../../../models/arma.model';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-arma-form',
@@ -29,7 +34,20 @@ export class ArmaFormComponent implements OnInit{
     this.formGroup = this.formBuilder.group({
       id:[null],
       nome:['', Validators.required],
-      estado:[null]
+      estado:[null],
+      qtdNoEstoque: ['', Validators.required],
+      preco: ['', Validators.required],
+      descricao: ['', Validators.required],
+      tipo: [1],
+      marca: ['', Validators.required],
+      acabamento: ['', Validators.required],
+      calibre: ['', Validators.required],
+      comprimentoDoCano: ['', Validators.required],
+      capacidadeDeTiro: ['', Validators.required],
+      numeroSigma: ['', Validators.required],
+      numeroDaArma: ['', Validators.required],
+      modelo: ['', Validators.required],
+      rna: ['', Validators.required],
     });
   }
 
@@ -49,38 +67,38 @@ export class ArmaFormComponent implements OnInit{
     this.formGroup = this.formBuilder.group({
       id:[(arma && arma.id) ? arma.id : null],
       nome: [(arma && arma.nome) ? arma.nome : '', Validators.required],
-      qtdNoEstoque: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      preco: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      descricao: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      tipo: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      marca: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      acabamento: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      calibre!: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      comprimentoDoCano: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      capacidadeDeTiro: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      numeroSigma: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      numeroDaArma: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      modelo: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
-      rna: [(municipio && municipio.nome) ? municipio.nome : '', Validators.required],
+      qtdNoEstoque: [(arma && arma.qtdNoEstoque) ? arma.qtdNoEstoque : '', Validators.required],
+      preco: [(arma && arma.preco) ? arma.preco : '', Validators.required],
+      descricao: [(arma && arma.descricao) ? arma.descricao : '', Validators.required],
+      tipo: [1],
+      marca: [(arma && arma.marca) ? arma.marca : '', Validators.required],
+      acabamento: [(arma && arma.acabamento) ? arma.acabamento : '', Validators.required],
+      calibre: [(arma && arma.calibre) ? arma.calibre : '', Validators.required],
+      comprimentoDoCano: [(arma && arma.comprimentoDoCano) ? arma.comprimentoDoCano : '', Validators.required],
+      capacidadeDeTiro: [(arma && arma.capacidadeDeTiro) ? arma.capacidadeDeTiro : '', Validators.required],
+      numeroSigma: [(arma && arma.numeroSigma) ? arma.numeroSigma : '', Validators.required],
+      numeroDaArma: [(arma && arma.numeroDaArma) ? arma.numeroDaArma : '', Validators.required],
+      modelo: [(arma && arma.modelo) ? arma.modelo : '', Validators.required],
+      rna: [(arma && arma.rna) ? arma.rna : '', Validators.required],
     });
   }
 
   salvar() {
     if (this.formGroup.valid) {
-      const municipio = this.formGroup.value;
-      if (municipio.id ==null) {
-        this.municipioService.insert(municipio).subscribe({
-          next: (municipioCadastrado) => {
-            this.router.navigateByUrl('/municipios');
+      const arma = this.formGroup.value;
+      if (arma.id ==null) {
+        this.armaService.insert(arma).subscribe({
+          next: (armaCadastrado) => {
+            this.router.navigateByUrl('/armas');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
           }
         });
       } else {
-        this.municipioService.update(municipio).subscribe({
-          next: (municipioAlterado) => {
-            this.router.navigateByUrl('/municipios');
+        this.armaService.update(arma).subscribe({
+          next: (armaAlterado) => {
+            this.router.navigateByUrl('/armas');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -92,11 +110,11 @@ export class ArmaFormComponent implements OnInit{
 
   excluir() {
     if (this.formGroup.valid) {
-      const municipio = this.formGroup.value;
-      if (municipio.id != null) {
-        this.municipioService.delete(municipio).subscribe({
+      const arma = this.formGroup.value;
+      if (arma.id != null) {
+        this.armaService.delete(arma).subscribe({
           next: () => {
-            this.router.navigateByUrl('/municipios');
+            this.router.navigateByUrl('/armas');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));

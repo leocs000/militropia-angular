@@ -6,6 +6,9 @@ import { MunicipioFormComponent } from './components/municipio/municipio-form/mu
 import { MunicipioListComponent } from './components/municipio/municipio-list/municipio-list.component';
 import { municipioResolver } from './components/municipio/resolver/municipio.resolver';
 import { ArmaListComponent } from './components/arma/arma-list/arma-list.component';
+import { ArmaFormComponent } from './components/arma/arma-form/arma-form.component';
+import { armaResolver } from './components/arma/resolver/arma.resolver';
+import { Title } from '@angular/platform-browser';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/armas', pathMatch: 'full'},
@@ -19,6 +22,6 @@ export const routes: Routes = [
     {path: 'municipios/edit/:id', component: MunicipioFormComponent, resolve: {municipio: municipioResolver}},
     
     {path: 'armas', component: ArmaListComponent, title: 'Lista de Armas'},
-//    {path: 'municipios/new', component: MunicipioFormComponent, title: 'Novo municipio'},
-//    {path: 'municipios/edit/:id', component: MunicipioFormComponent, resolve: {municipio: municipioResolver}},
+    {path: 'armas/new', component: ArmaFormComponent, title: 'Cadastrar Arma'},
+    {path: 'armas/edit/:id', component: ArmaFormComponent, resolve: {arma: armaResolver}},
 ];

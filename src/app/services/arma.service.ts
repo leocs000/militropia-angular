@@ -41,4 +41,5 @@ export class ArmaService {
   delete(arma: Arma): Observable<any>{
     return this.httpClient.delete<Arma>(`${this.baseUrl}/${arma.id}`);
   }
+
 }
