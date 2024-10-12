@@ -48,9 +48,6 @@ export class AcabamentoFormComponent implements OnInit{
   initializeForm(): void{
     const acabamento: Acabamento = this.activatedRoute.snapshot.data['acabamento'];
 
-    //selecionando o estasdo
-//    const estado = this.armas.find(estado => estado.id === (municipio?.estado?.id || null));
-
     this.formGroup = this.formBuilder.group({
       id:[(acabamento && acabamento.id) ? acabamento.id : null],
       material: [(acabamento && acabamento.label) ? acabamento.label : '', Validators.required],
@@ -59,20 +56,20 @@ export class AcabamentoFormComponent implements OnInit{
 
   salvar() {
     if (this.formGroup.valid) {
-      const arma = this.formGroup.value;
-      if (arma.id ==null) {
-        this.acabamentoService.insert(arma).subscribe({
+      const acabamento = this.formGroup.value;
+      if (acabamento.id ==null) {
+        this.acabamentoService.insert(acabamento).subscribe({
           next: (grupoCadastrado) => {
-            this.router.navigateByUrl('/armas');
+            this.router.navigateByUrl('/acabamentos');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
           }
         });
       } else {
-        this.acabamentoService.update(arma).subscribe({
+        this.acabamentoService.update(acabamento).subscribe({
           next: (acabamentoAlterado) => {
-            this.router.navigateByUrl('/armas');
+            this.router.navigateByUrl('/acabamentos');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -88,7 +85,7 @@ export class AcabamentoFormComponent implements OnInit{
       if (arma.id != null) {
         this.acabamentoService.delete(arma).subscribe({
           next: () => {
-            this.router.navigateByUrl('/armas');
+            this.router.navigateByUrl('/acabamentos');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));

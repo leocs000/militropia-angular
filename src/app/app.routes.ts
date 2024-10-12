@@ -17,7 +17,9 @@ import { municipioResolver } from './components/municipio/resolver/municipio.res
 import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
 import { ClienteFormComponent } from './components/cliente/cliente-form/cliente-form.component';
 import { clienteResolver } from './components/cliente/resolver/cliente.resolver';
-import { AcabamentoListComponent } from './components/acabamento/acamento-list/acabamento-list.component';
+import { AcabamentoListComponent } from './components/acabamento/acabamento-list/acabamento-list.component';
+import { acabamentoResolver } from './components/acabamento/resolver/acabamento.resolver';
+import { AcabamentoFormComponent } from './components/acabamento/acabamento-form/acabamento-form.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/armas', pathMatch: 'full'},
@@ -47,6 +49,6 @@ export const routes: Routes = [
     {path: 'cliente/edit/:id',component: ClienteFormComponent, resolve: {cliente: clienteResolver}},
 
     {path: 'acabamentos',component: AcabamentoListComponent, title: 'Lista de Acabamentos'},
-//    {path: 'clientes/new',component: ClienteFormComponent, title: 'Novo Cliente'},
-//    {path: 'cliente/edit/:id',component: ClienteFormComponent, resolve: {cliente: clienteResolver}}
+    {path: 'acabamentos/new',component: AcabamentoFormComponent, title: 'Novo acabamento'},
+    {path: 'acabamentos/edit/:id',component: AcabamentoFormComponent, resolve: {acabamento: acabamentoResolver}}
 ];

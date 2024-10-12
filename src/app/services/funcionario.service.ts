@@ -28,8 +28,8 @@ export class FuncionarioService {
     return this.httpClient.put<any>(`${this.baseUrl}/${funcionario.id}`, funcionario); 
   }
 
-  delete(id: number): Observable<any>{
-    return this.httpClient.delete<any>(`${this.baseUrl}/${id}`); 
+  delete(funcionario: Funcionario): Observable<any>{
+    return this.httpClient.delete<any>(`${this.baseUrl}/${funcionario.id}`); 
   }
 
 }

@@ -28,8 +28,8 @@ export class ClienteService {
     return this.httpClient.put<any>(`${this.baseUrl}/${cliente.id}`, cliente); 
   }
 
-  delete(id: number): Observable<any>{
-    return this.httpClient.delete<any>(`${this.baseUrl}/${id}`); 
+  delete(cliente: Cliente): Observable<any>{
+    return this.httpClient.delete<any>(`${this.baseUrl}/${cliente.id}`); 
   }
 
 }

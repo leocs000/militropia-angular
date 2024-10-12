@@ -31,4 +31,18 @@ export class FuncionarioListComponent implements OnInit {
     })
   }
 
+  excluir(funcionario: Funcionario) {
+    if (funcionario.id != null) {
+      this.funcionarioService.delete(funcionario).subscribe({
+        next: () => {
+          window.location.reload();
+        },
+        error: (err) => {
+          console.log("não entrou");
+          console.log('Erro ao Excluir' + JSON.stringify(err));
+        }
+      });
+    }
+  }
+
 }

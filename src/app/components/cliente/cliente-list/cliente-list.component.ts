@@ -31,4 +31,18 @@ export class ClienteListComponent implements OnInit {
     })
   }
 
+  excluir(cliente: Cliente) {
+    if (cliente.id != null) {
+      this.clienteService.delete(cliente).subscribe({
+        next: () => {
+          window.location.reload();
+        },
+        error: (err) => {
+          console.log("não entrou");
+          console.log('Erro ao Excluir' + JSON.stringify(err));
+        }
+      });
+    }
+  }
+
 }
