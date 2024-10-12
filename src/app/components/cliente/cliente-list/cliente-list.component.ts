@@ -17,7 +17,7 @@ import { ClienteService } from '../../../services/cliente.service';
   styleUrl: './cliente-list.component.css'
 })
 export class ClienteListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'telefone', 'numeroRegistro_posse_porte', 'login', 'senha'];
+  displayedColumns: string[] = ['id', 'nome', 'email', 'login', 'acao'];
   clientes: Cliente[] = [];
 
   constructor(private clienteService: ClienteService) {

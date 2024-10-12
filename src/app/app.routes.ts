@@ -14,6 +14,9 @@ import { funcionarioResolver } from './components/funcionario/resolver/funcionar
 import { MunicipioFormComponent } from './components/municipio/municipio-form/municipio-form.component';
 import { MunicipioListComponent } from './components/municipio/municipio-list/municipio-list.component';
 import { municipioResolver } from './components/municipio/resolver/municipio.resolver';
+import { ClienteListComponent } from './components/cliente/cliente-list/cliente-list.component';
+import { ClienteFormComponent } from './components/cliente/cliente-form/cliente-form.component';
+import { clienteResolver } from './components/cliente/resolver/cliente.resolver';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/armas', pathMatch: 'full'},
@@ -36,5 +39,9 @@ export const routes: Routes = [
     
     {path: 'funcionarios',component: FuncionarioListComponent, title: 'Lista de Funcionarios'},
     {path: 'funcionarios/new',component: FuncionarioFormComponent, title: 'Novo Funcionario'},
-    {path: 'funcionarios/edit/:id',component: FuncionarioFormComponent, resolve: {funcionario: funcionarioResolver}}
+    {path: 'funcionarios/edit/:id',component: FuncionarioFormComponent, resolve: {funcionario: funcionarioResolver}},
+
+    {path: 'clientes',component: ClienteListComponent, title: 'Lista de Clientes'},
+    {path: 'clientes/new',component: ClienteFormComponent, title: 'Novo Cliente'},
+    {path: 'cliente/edit/:id',component: ClienteFormComponent, resolve: {cliente: clienteResolver}}
 ];

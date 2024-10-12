@@ -17,7 +17,7 @@ import { FuncionarioService } from '../../../services/funcionario.service';
   styleUrl: './funcionario-list.component.css'
 })
 export class FuncionarioListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'email', 'login'];
+  displayedColumns: string[] = ['id', 'nome', 'email', 'login', 'acao'];
   funcionarios: Funcionario[] = [];
 
   constructor(private funcionarioService: FuncionarioService) {

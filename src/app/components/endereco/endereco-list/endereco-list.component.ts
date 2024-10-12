@@ -17,7 +17,7 @@ import { EnderecoService } from '../../../services/endereco.service';
   styleUrl: './endereco-list.component.css'
 })
 export class EnderecoListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'logradouro', 'cep'];
+  displayedColumns: string[] = ['id', 'nome', 'logradouro', 'cep', 'acao'];
   enderecos: Endereco[] = [];
 
   constructor(private enderecoService: EnderecoService) {
