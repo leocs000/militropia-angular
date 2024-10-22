@@ -7,7 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Cliente } from '../../../models/cliente.model';
 import { ClienteService } from '../../../services/cliente.service';
 
 @Component({
@@ -23,13 +24,39 @@ import { ClienteService } from '../../../services/cliente.service';
 export class ClienteFormComponent {
   formGroup: FormGroup;
 
+
   constructor(private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private router: Router) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
       this.formGroup = this.formBuilder.group({
+        id:[null],
         nome:['', Validators.required],
-        sigla:['', Validators.required]
+        cpf: ['', Validators.required],
+        email: ['', Validators.required],
+        telefone: ['', Validators.required],
+        numeroRegistro_posse_porte: ['', Validators.required],
+        login: ['', Validators.required],
+        senha: ['', Validators.required],
       })
+  }
+
+  initializeForm(): void{
+    const cliente: Cliente = this.activatedRoute.snapshot.data['cliente'];
+
+    //selecionando o estasdo
+//    const estado = this.clientes.find(estado => estado.id === (municipio?.estado?.id || null));
+
+    this.formGroup = this.formBuilder.group({
+      id:[(cliente && cliente.id) ? cliente.id : null],
+      nome: [(cliente && cliente.nome) ? cliente.nome : '', Validators.required],
+      cpf: [(cliente && cliente.cpf) ? cliente.cpf : '', Validators.required],
+      email: [(cliente && cliente.email) ? cliente.email : '', Validators.required],
+      telefone: [(cliente && cliente.telefone) ? cliente.telefone : '', Validators.required],
+      numeroRegistro_posse_porte: [(cliente && cliente.numeroRegistro_posse_porte) ? cliente.numeroRegistro_posse_porte : '', Validators.required],
+      login: [(cliente && cliente.login) ? cliente.login : '', Validators.required],
+      senha: [(cliente && cliente.senha) ? cliente.senha : '', Validators.required]
+    });
   }
 
   onSubmit() {

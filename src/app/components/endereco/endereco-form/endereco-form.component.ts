@@ -7,7 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Endereco } from '../../../models/endereco.model';
 import { EnderecoService } from '../../../services/endereco.service';
 
 @Component({
@@ -25,11 +26,38 @@ export class EnderecoFormComponent {
 
   constructor(private formBuilder: FormBuilder,
     private enderecoService: EnderecoService,
-    private router: Router) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
       this.formGroup = this.formBuilder.group({
+        id:[null],
         nome:['', Validators.required],
-        sigla:['', Validators.required]
+        logradouro: ['', Validators.required],
+        numero: ['', Validators.required],
+        complemento: ['', Validators.required],
+        bairro: ['', Validators.required],
+        cep: ['', Validators.required],
+        cidade: ['', Validators.required],
+        estado: ['', Validators.required]
       }) 
+  }
+
+  initializeForm(): void{
+    const endereco: Endereco = this.activatedRoute.snapshot.data['endereco'];
+
+    //selecionando o estasdo
+//    const estado = this.enderecos.find(estado => estado.id === (municipio?.estado?.id || null));
+
+    this.formGroup = this.formBuilder.group({
+      id:[(endereco && endereco.id) ? endereco.id : null],
+      nome: [(endereco && endereco.nome) ? endereco.nome : '', Validators.required],
+      logradouro: [(endereco && endereco.logradouro) ? endereco.logradouro : '', Validators.required],
+      numero: [(endereco && endereco.numero) ? endereco.numero : '', Validators.required],
+      complemento: [(endereco && endereco.complemento) ? endereco.complemento : '', Validators.required],
+      bairro: [(endereco && endereco.bairro) ? endereco.bairro : '', Validators.required],
+      cep: [(endereco && endereco.cep) ? endereco.cep : '', Validators.required],
+      cidade: [(endereco && endereco.cidade) ? endereco.cidade : '', Validators.required],
+      estado: [(endereco && endereco.estado) ? endereco.estado : '', Validators.required]
+    });
   }
 
   onSubmit() {

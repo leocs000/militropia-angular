@@ -1,13 +1,14 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FuncionarioService } from '../../../services/funcionario.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Funcionario } from '../../../models/funcionario.model';
 
 
 @Component({
@@ -17,17 +18,52 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   templateUrl: './funcionario-form.component.html',
   styleUrl: './funcionario-form.component.css'
 })
-export class FuncionarioFormComponent {
+export class FuncionarioFormComponent implements OnInit{
   formGroup: FormGroup;
+  funcionarios: Funcionario[] = [];
 
   constructor(private formBuilder: FormBuilder,
     private funcionarioService: FuncionarioService,
-    private router: Router) {
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
       this.formGroup = this.formBuilder.group({
-        nome:['', Validators.required],
-        sigla:['', Validators.required]
-      }) 
+        id: [null],
+        nome: ['', Validators.required],
+        cpf: ['', Validators.required],
+        email: ['', Validators.required],
+        telefone: ['', Validators.required],
+        matricula: ['', Validators.required],
+        login: ['', Validators.required],
+        senha: ['', Validators.required],
+        }
+      ) 
   }
+
+  ngOnInit(): void {
+    this.funcionarioService.findAll().subscribe(data =>{
+      this.funcionarios = data;
+      this.initializeForm();
+    })
+  }
+
+  initializeForm(): void{
+    const funcionario: Funcionario = this.activatedRoute.snapshot.data['funcionario'];
+
+    //selecionando o estasdo
+//    const estado = this.funcionarios.find(estado => estado.id === (municipio?.estado?.id || null));
+
+    this.formGroup = this.formBuilder.group({
+      id:[(funcionario && funcionario.id) ? funcionario.id : null],
+      nome: [(funcionario && funcionario.nome) ? funcionario.nome : '', Validators.required],
+      cpf: [(funcionario && funcionario.cpf) ? funcionario.cpf : '', Validators.required],
+      email: [(funcionario && funcionario.email) ? funcionario.email : '', Validators.required],
+      telefone: [(funcionario && funcionario.telefone) ? funcionario.telefone : '', Validators.required],
+      matricula: [(funcionario && funcionario.matricula) ? funcionario.matricula : '', Validators.required],
+      login: [(funcionario && funcionario.login) ? funcionario.login : '', Validators.required],
+      senha: [(funcionario && funcionario.senha) ? funcionario.senha : '', Validators.required],
+    });
+  }
+
 
   onSubmit() {
     if (this.formGroup.valid) {
@@ -86,5 +122,9 @@ export class FuncionarioFormComponent {
   }
 
 
+}
+
+function ngOnInit() {
+  throw new Error('Function not implemented.');
 }
 

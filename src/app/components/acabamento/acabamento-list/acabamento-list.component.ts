@@ -29,9 +29,9 @@ export class AcabamentoListComponent implements OnInit{
     });
   }
 
-  excluir(arma: Acabamento) {
-    if (arma.id != null) {
-      this.acabamentoService.delete(arma).subscribe({
+  excluir(acabamento: Acabamento) {
+    if (acabamento.id != null) {
+      this.acabamentoService.delete(acabamento).subscribe({
         next: () => {
           window.location.reload();
         },
