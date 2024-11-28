@@ -34,20 +34,15 @@ export class ArmaFormComponent implements OnInit{
     this.formGroup = this.formBuilder.group({
       id:[null],
       nome:['', Validators.required],
-      estado:[null],
       qtdNoEstoque: ['', Validators.required],
       preco: ['', Validators.required],
       descricao: ['', Validators.required],
       tipo: [1],
-      marca: ['', Validators.required],
       acabamento: ['', Validators.required],
       calibre: ['', Validators.required],
-      comprimentoDoCano: ['', Validators.required],
       capacidadeDeTiro: ['', Validators.required],
-      numeroSigma: ['', Validators.required],
-      numeroDaArma: ['', Validators.required],
       modelo: ['', Validators.required],
-      rna: ['', Validators.required],
+      
     });
   }
 
@@ -71,15 +66,10 @@ export class ArmaFormComponent implements OnInit{
       preco: [(arma && arma.preco) ? arma.preco : '', Validators.required],
       descricao: [(arma && arma.descricao) ? arma.descricao : '', Validators.required],
       tipo: [1],
-      marca: [(arma && arma.marca) ? arma.marca : '', Validators.required],
       acabamento: [(arma && arma.acabamento) ? arma.acabamento : '', Validators.required],
       calibre: [(arma && arma.calibre) ? arma.calibre : '', Validators.required],
-      comprimentoDoCano: [(arma && arma.comprimentoDoCano) ? arma.comprimentoDoCano : '', Validators.required],
       capacidadeDeTiro: [(arma && arma.capacidadeDeTiro) ? arma.capacidadeDeTiro : '', Validators.required],
-      numeroSigma: [(arma && arma.numeroSigma) ? arma.numeroSigma : '', Validators.required],
-      numeroDaArma: [(arma && arma.numeroDaArma) ? arma.numeroDaArma : '', Validators.required],
       modelo: [(arma && arma.modelo) ? arma.modelo : '', Validators.required],
-      rna: [(arma && arma.rna) ? arma.rna : '', Validators.required],
     });
   }
 

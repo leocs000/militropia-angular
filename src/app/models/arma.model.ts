@@ -1,21 +1,25 @@
 import { Acabamento } from "./acabamento.model";
 import { Calibre } from "./calibre.model";
+import { Material } from "./material.model";
 import { TipoArma } from "./tipo-arma.model";
+import { TipoTiro } from "./tipo-tiro.model";
 
 export class Arma {
     id!: number;
     nome!: string;
-    qtdNoEstoque!: number;
-    preco!: number;
     descricao!: string;
-    tipo!: TipoArma;
-    marca!: string;
-    acabamento!: string;
-    calibre!: string;
-    comprimentoDoCano!: string;
-    capacidadeDeTiro!: number;
-    numeroSigma!: string;
-    numeroDaArma!: string;
+    preco!: number;
+    qtdNoEstoque!: number;
+    fabricante!: string;
     modelo!: string;
-    rna!: string;
+    material!: Material;
+    calibre!: Calibre;
+    tipo!: TipoArma;
+    acabamento!: Acabamento;
+    peso!: number;
+    propulsor!: string;
+    tipoTiro!: TipoTiro;
+    velocidade!: string;
+    capacidadeDeTiro!: number;
+    nomeImagem!: string;
 }

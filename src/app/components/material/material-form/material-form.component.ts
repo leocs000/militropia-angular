@@ -1,33 +1,32 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Acabamento } from '../../../models/acabamento.model';
-import { ArmaService } from '../../../services/arma.service';
-import { AcabamentoService } from '../../../services/acabamento.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Material } from '../../../models/material.model';
+import { MaterialService } from '../../../services/material.service';
 
 @Component({
-  selector: 'app-acabamento-form',
+  selector: 'app-material-form',
   standalone: true,
   imports: [NgIf, ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatButtonModule, MatCardModule, MatToolbarModule,
     RouterModule, MatSelectModule],
-  templateUrl: './acabamento-form.component.html',
-  styleUrl: './acabamento-form.component.css'
+  templateUrl: './material-form.component.html',
+  styleUrl: './material-form.component.css'
 })
-export class AcabamentoFormComponent implements OnInit{
+export class MaterialFormComponent {
 
   formGroup: FormGroup;
-  acabamentos: Acabamento[] = [];
+  materiais: Material[] = [];
 
   constructor(private formBuilder: FormBuilder,
-    private acabamentoService: AcabamentoService,
+    private materialService: MaterialService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
 
@@ -43,32 +42,32 @@ export class AcabamentoFormComponent implements OnInit{
   }
 
   initializeForm(): void{
-    const acabamento: Acabamento = this.activatedRoute.snapshot.data['acabamento'];
-    console.log(acabamento);
+    const material: Material = this.activatedRoute.snapshot.data['material'];
+    console.log(material);
 
     this.formGroup = this.formBuilder.group({
-      id:[(acabamento && acabamento.id) ? acabamento.id : null],
-      material: [(acabamento && acabamento.material) ? acabamento.material : '', Validators.required],
+      id:[(material && material.id) ? material.id : null],
+      material: [(material && material.material) ? material.material : '', Validators.required],
     });
   }
 
   salvar() {
     if (this.formGroup.valid) {
-      const acabamento = this.formGroup.value;
-      if (acabamento.id == null) {
+      const material = this.formGroup.value;
+      if (material.id == null) {
         console.log("entrou no new");
-        this.acabamentoService.insert(acabamento).subscribe({
+        this.materialService.insert(material).subscribe({
           next: (grupoCadastrado) => {
-            this.router.navigateByUrl('/acabamentos');
+            this.router.navigateByUrl('/materiais');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
           }
         });
       } else {
-        this.acabamentoService.update(acabamento).subscribe({
+        this.materialService.update(material).subscribe({
           next: (acabamentoAlterado) => {
-            this.router.navigateByUrl('/acabamentos');
+            this.router.navigateByUrl('/materiais');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -80,9 +79,9 @@ export class AcabamentoFormComponent implements OnInit{
 
   excluir() {
     if (this.formGroup.valid) {
-      const acabamento = this.formGroup.value;
-      if (acabamento.id != null) {
-        this.acabamentoService.delete(acabamento).subscribe({
+      const material = this.formGroup.value;
+      if (material.id != null) {
+        this.materialService.delete(material).subscribe({
           next: () => {
             this.router.navigateByUrl('/acabamentos');
           },
@@ -93,5 +92,4 @@ export class AcabamentoFormComponent implements OnInit{
       }
     }
   }
-
 }
