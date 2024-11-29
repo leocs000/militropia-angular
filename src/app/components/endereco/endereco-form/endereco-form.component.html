@@ -46,7 +46,7 @@
 
                 <mat-form-field appearance="fill" class="full-width-input">
                     <mat-label>CEP</mat-label>
-                    <input matInput type="text" formControlName="cep">
+                    <input matInput type="text" formControlName="cep" (blur)="buscarCep()">
                     <mat-error *ngIf="formGroup.get('cep')
                                     && formGroup.get('cep')?.invalid
                                     && formGroup.get('cep')?.touched">
@@ -92,7 +92,7 @@
             <button mat-raised-button
                     color="primary"
                     (click)="salvar()"
-                    [disabled]="formGroup.invalid">
+                    [disabled]="formGroup.valid">
                 Salvar
             </button>
             <button mat-raised-button

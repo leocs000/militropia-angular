@@ -74,7 +74,21 @@ export class EnderecoFormComponent {
     }
   }
 
-  
+  buscarCep(){
+    const cep = this.formGroup.get('cep')?.value;
+
+    this.enderecoService.findbyCep(cep).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.formGroup.patchValue({
+          logradouro: data.logradouro,
+          bairro: data.bairro,
+          cidade: data.localidade,
+          estado: data.estado
+        });
+      })
+  }
+
   salvar() {
     if (this.formGroup.valid) {
       const endereco = this.formGroup.value;
