@@ -23,6 +23,9 @@ import { AcabamentoFormComponent } from './components/acabamento/acabamento-form
 import { MaterialListComponent } from './components/material/material-list/material-list.component';
 import { materialResolver } from './components/material/resolver/material.resolver';
 import { MaterialFormComponent } from './components/material/material-form/material-form.component';
+import { TipoTiroListComponent } from './components/tipo-tiro/tipo-tiro-list/tipo-tiro-list.component';
+import { tipoTiroResolver } from './components/tipo-tiro/resolver/tipo-tiro.resolver';
+import { TipoTiroFormComponent } from './components/tipo-tiro/tipo-tiro-form/tipo-tiro-form.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/armas', pathMatch: 'full'},
@@ -57,5 +60,9 @@ export const routes: Routes = [
 
     {path: 'materiais', component: MaterialListComponent, title: 'Lista de Materiais'},
     {path: 'materiais/new',component: MaterialFormComponent, title: 'Novo Material'},
-    {path: 'materiais/edit/:id',component: MaterialFormComponent, resolve: {material: materialResolver}}
+    {path: 'materiais/edit/:id',component: MaterialFormComponent, resolve: {material: materialResolver}},
+
+    {path: 'tipotiros', component: TipoTiroListComponent, title: 'Listagem dos Tipos de Tiros'},
+    {path: 'tipotiros/new',component: TipoTiroFormComponent, title: 'Novo Tipo de Tiro'},
+    {path: 'tipotiros/edit/:id',component: TipoTiroFormComponent, resolve: {tipoTiro: tipoTiroResolver}}
 ];
