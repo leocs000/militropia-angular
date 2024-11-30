@@ -39,43 +39,8 @@
                 </mat-form-field>
 
                 <mat-form-field appearance="fill" class="full-width-input">
-                    <mat-label>Tipo de Arma</mat-label>
-                    <input matInput type="number" formControlName="tipo">
-                </mat-form-field>
-
-                <mat-form-field appearance="fill" class="full-width-input">
-                    <mat-label>Marca</mat-label>
-                    <input matInput type="text" formControlName="marca">
-                </mat-form-field>
-
-                <mat-form-field appearance="fill" class="full-width-input">
-                    <mat-label>Acabamento</mat-label>
-                    <input matInput type="text" formControlName="acabamento">
-                </mat-form-field>
-
-                <mat-form-field appearance="fill" class="full-width-input">
-                    <mat-label>Calibre</mat-label>
-                    <input matInput type="text" formControlName="calibre">
-                </mat-form-field>
-
-                <mat-form-field appearance="fill" class="full-width-input">
-                    <mat-label>Comprimento do Cano</mat-label>
-                    <input matInput type="text" formControlName="comprimentoDoCano">
-                </mat-form-field>
-
-                <mat-form-field appearance="fill" class="full-width-input">
-                    <mat-label>Capacidade de Tiros</mat-label>
-                    <input matInput type="number" formControlName="capacidadeDeTiro">
-                </mat-form-field>
-
-                <mat-form-field appearance="fill" class="full-width-input">
-                    <mat-label>Numero Sigma</mat-label>
-                    <input matInput type="text" formControlName="numeroSigma">
-                </mat-form-field>
-
-                <mat-form-field appearance="fill" class="full-width-input">
-                    <mat-label>Numero da arma</mat-label>
-                    <input matInput type="text" formControlName="numeroDaArma">
+                    <mat-label>Fabricante</mat-label>
+                    <input matInput type="text" formControlName="fabricante">
                 </mat-form-field>
 
                 <mat-form-field appearance="fill" class="full-width-input">
@@ -83,9 +48,81 @@
                     <input matInput type="text" formControlName="modelo">
                 </mat-form-field>
 
+                <mat-form-field appearance="fill">
+                    <mat-label>Material</mat-label>
+                    <mat-select formControlName="material">
+                        @for (material of materiais; track material.id) {
+                            <mat-option [value]="material">
+                                {{material.material}}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Calibre</mat-label>
+                    <mat-select formControlName="calibre">
+                        @for (calibre of calibres; track calibre.id) {
+                            <mat-option [value]="calibre">
+                                {{calibre.calibre}}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo de Arma</mat-label>
+                    <mat-select formControlName="tipoArma">
+                        @for (tipoArma of tiposArma; track tipoArma.id) {
+                            <mat-option [value]="tipoArma">
+                                {{tipoArma.label}}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo de Acabamento</mat-label>
+                    <mat-select formControlName="acabamento">
+                        @for (acabamento of acabamentos; track acabamento.id) {
+                            <mat-option [value]="acabamento">
+                                {{acabamento.material}}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
                 <mat-form-field appearance="fill" class="full-width-input">
-                    <mat-label>RNA</mat-label>
-                    <input matInput type="text" formControlName="rna">
+                    <mat-label>Peso</mat-label>
+                    <input matInput type="number" formControlName="peso">
+                </mat-form-field>
+
+                
+
+                <mat-form-field appearance="fill" class="full-width-input">
+                    <mat-label>Propulsor</mat-label>
+                    <input matInput type="text" formControlName="propulsor">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Tipo de Tiro</mat-label>
+                    <mat-select formControlName="tipoTiro">
+                        @for (tipoTiro of tiposTiro; track tipoTiro.id) {
+                            <mat-option [value]="tipoTiro">
+                                {{tipoTiro.descricao}}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width-input">
+                    <mat-label>Velocidade</mat-label>
+                    <input matInput type="text" formControlName="velocidade">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width-input">
+                    <mat-label>Capacidade de Tiros</mat-label>
+                    <input matInput type="number" formControlName="capacidadeDeTiro">
                 </mat-form-field>
 
             </form>
