@@ -71,11 +71,11 @@
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
-                    <mat-label>Tipo de Arma</mat-label>
-                    <mat-select formControlName="tipoArma">
+                    <mat-label>Tipos de Arma</mat-label>
+                    <mat-select formControlName="tipo">
                         @for (tipoArma of tiposArma; track tipoArma.id) {
                             <mat-option [value]="tipoArma">
-                                {{tipoArma.label}}
+                                {{tipoArma.descricao}}
                             </mat-option>
                         }
                     </mat-select>

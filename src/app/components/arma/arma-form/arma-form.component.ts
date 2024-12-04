@@ -63,7 +63,7 @@ export class ArmaFormComponent implements OnInit{
       modelo: ['', Validators.required],
       material:[null],
       calibre:[null],
-      tipoArma: [null, Validators.required],
+      tipo: [null, Validators.required],
       acabamento: [null],
       peso: [null],
       propulsor:[''],
@@ -82,15 +82,22 @@ export class ArmaFormComponent implements OnInit{
       tiposArma: this.tipoArmaService.findAll(), 
       acabamentos: this.acabamentoService.findAll(), 
       tiposTiro: this.tiposTiroService.findAll() 
-    }).subscribe(data => { 
-      this.armas = data.armas; 
-      this.materiais = data.materiais; 
-      this.calibres = data.calibres; 
-      this.tiposArma = data.tiposArma; 
-      this.acabamentos = data.acabamentos; 
-      this.tiposTiro = data.tiposTiro; 
-      this.initializeForm(); 
+    }).subscribe({
+      next: data => { 
+        this.armas = data.armas; 
+        this.materiais = data.materiais; 
+        this.calibres = data.calibres; 
+        this.tiposArma = data.tiposArma; 
+        this.acabamentos = data.acabamentos; 
+        this.tiposTiro = data.tiposTiro; 
+        this.initializeForm(); 
+      },
+      error: err => {
+        console.error('Erro ao carregar dados', err);
+      }
     });
+    
+    
   }
 
   initializeForm(): void{
@@ -103,8 +110,6 @@ export class ArmaFormComponent implements OnInit{
     const acabamento = this.acabamentos.find(acabamento => acabamento.id === (arma?.acabamento?.id || null));
     const tipoTiro = this.tiposTiro.find(tipoTiro => tipoTiro.id === (arma?.tipoTiro?.id || null));
 
-    console.log(tipoArma);
-
     this.formGroup = this.formBuilder.group({
       id:[(arma && arma.id) ? arma.id : null],
       nome: [(arma && arma.nome) ? arma.nome : '', Validators.required],
@@ -115,7 +120,7 @@ export class ArmaFormComponent implements OnInit{
       modelo: [(arma && arma.modelo) ? arma.modelo : '', Validators.required],
       material:[material],
       calibre:[calibre],
-      tipoArma: [tipoArma, Validators.required],
+      tipo: [tipoArma, Validators.required],
       acabamento: [acabamento],
       peso: [(arma && arma.peso) ? arma.peso : ''],
       propulsor:[(arma && arma.propulsor) ? arma.propulsor : ''],
@@ -128,8 +133,7 @@ export class ArmaFormComponent implements OnInit{
   salvar() {
     if (this.formGroup.valid) {
       const arma = this.formGroup.value;
-      console.log(arma)
-      if (arma.id ==null) {
+      if (arma.id == null) {
         this.armaService.insert(arma).subscribe({
           next: (armaCadastrado) => {
             this.router.navigateByUrl('/armas');

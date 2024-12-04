@@ -28,46 +28,43 @@ export class ArmaService {
   insert(arma: Arma): Observable<Arma>{
     const data = {
       nome: arma.nome,
-      descricao: arma.descricao,
-      preco: arma.preco,
       qtdNoEstoque: arma.qtdNoEstoque,
+      preco: arma.preco,
+      descricao: arma.descricao,
       fabricante: arma.fabricante,
       modelo: arma.modelo,
+      peso: arma.peso,
       idMaterial: arma.material.id,
-      idCalibre:arma.calibre.id,
+      idCalibre: arma.calibre.id,
       idTipoArma: arma.tipo.id,
       idAcabamento: arma.acabamento.id,
-      peso: arma.peso,
-      propulsor: arma.propulsor,
-      idTipoTiro: arma.tipoTiro.id,
-      velocidade: arma.velocidade,
       capacidadeDeTiro: arma.capacidadeDeTiro,
+      propulsor: arma.propulsor,
+      velocidade: arma.velocidade,
+      idtipoTiro: arma.tipoTiro.id,
     };
     
     return this.httpClient.post<Arma>(this.baseUrl, data);
   }
 
   update(arma: Arma): Observable<Arma>{
-    console.log(arma);
     const data = {
       nome: arma.nome,
-      descricao: arma.descricao,
-      preco: arma.preco,
       qtdNoEstoque: arma.qtdNoEstoque,
+      preco: arma.preco,
+      descricao: arma.descricao,
       fabricante: arma.fabricante,
       modelo: arma.modelo,
-      idMaterial: arma.material.id,
-      idCalibre:arma.calibre.id,
-      idTipoArma: 1,
-      idAcabamento: arma.acabamento.id,
       peso: arma.peso,
-      propulsor: arma.propulsor,
-      idTipoTiro: arma.tipoTiro.id,
-      velocidade: arma.velocidade,
+      idMaterial: arma.material.id,
+      idCalibre: arma.calibre.id,
+      idTipoArma: arma.tipo.id,
+      idAcabamento: arma.acabamento.id,
       capacidadeDeTiro: arma.capacidadeDeTiro,
+      propulsor: arma.propulsor,
+      velocidade: arma.velocidade,
+      idtipoTiro: arma.tipoTiro.id,
     };
-
-    console.log(data);
     return this.httpClient.put<Arma>(`${this.baseUrl}/${arma.id}`, data);
   }
 
