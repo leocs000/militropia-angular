@@ -13,8 +13,21 @@ export class ArmaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  findAll(): Observable<Arma[]>{
-    return this.httpClient.get<Arma[]>(this.baseUrl);
+  findAll(page?: number, pageSize?: number): Observable<Arma[]>{
+
+    let params = {};
+
+    if (page !== undefined && pageSize !== undefined) {
+      params = {
+        page: page.toString(),
+        pageSize: pageSize.toString()
+      }
+    }
+    return this.httpClient.get<Arma[]>(this.baseUrl, {params});
+  }
+
+  count(): Observable<number>{
+    return this.httpClient.get<number>(`${this.baseUrl}/count`);
   }
 
   findTiposArma(): Observable<TipoArma[]>{
