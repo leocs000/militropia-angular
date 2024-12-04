@@ -24,7 +24,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 export class AcabamentoFormComponent implements OnInit{
 
   formGroup: FormGroup;
-  acabamentos: Acabamento[] = [];
 
   constructor(private formBuilder: FormBuilder,
     private acabamentoService: AcabamentoService,

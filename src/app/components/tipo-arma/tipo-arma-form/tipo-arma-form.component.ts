@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -8,29 +8,30 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CalibreService } from '../../../services/calibre.service';
-import { Calibre } from '../../../models/calibre.model';
+import { TipoArmaService } from '../../../services/tipo-arma.service';
+import { TipoArma } from '../../../models/tipo-arma.model';
 
 @Component({
-  selector: 'app-calibre-form',
+  selector: 'app-tipo-arma-form',
   standalone: true,
   imports: [NgIf, ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatButtonModule, MatCardModule, MatToolbarModule,
     RouterModule, MatSelectModule],
-  templateUrl: './calibre-form.component.html',
-  styleUrl: './calibre-form.component.css'
+  templateUrl: './tipo-arma-form.component.html',
+  styleUrl: './tipo-arma-form.component.css'
 })
-export class CalibreFormComponent {
+export class TipoArmaFormComponent implements OnInit{
   formGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private calibreService: CalibreService,
-              private router: Router,
-              private activatedRoute: ActivatedRoute
-  ){
+    private tipoArmaService: TipoArmaService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
+
+    //inicializando
     this.formGroup = this.formBuilder.group({
       id:[null],
-      calibre:['', Validators.required],
+      descricao:['', Validators.required],
     });
   }
 
@@ -39,32 +40,32 @@ export class CalibreFormComponent {
   }
 
   initializeForm(): void{
-    const calibre: Calibre = this.activatedRoute.snapshot.data['calibre'];
-    console.log(calibre);
+    const tipoArma: TipoArma = this.activatedRoute.snapshot.data['tipoArma'];
+    console.log(tipoArma);
 
     this.formGroup = this.formBuilder.group({
-      id:[(calibre && calibre.id) ? calibre.id : null],
-      calibre: [(calibre && calibre.calibre) ? calibre.calibre : '', Validators.required],
+      id:[(tipoArma && tipoArma.id) ? tipoArma.id : null],
+      descricao: [(tipoArma && tipoArma.descricao) ? tipoArma.descricao : '', Validators.required],
     });
   }
 
   salvar() {
     if (this.formGroup.valid) {
-      const calibre = this.formGroup.value;
-      if (calibre.id == null) {
+      const tipoArma = this.formGroup.value;
+      if (tipoArma.id == null) {
         console.log("entrou no new");
-        this.calibreService.insert(calibre).subscribe({
+        this.tipoArmaService.insert(tipoArma).subscribe({
           next: (grupoCadastrado) => {
-            this.router.navigateByUrl('/calibres');
+            this.router.navigateByUrl('/tiposarma');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
           }
         });
       } else {
-        this.calibreService.update(calibre).subscribe({
-          next: (calibreAlterado) => {
-            this.router.navigateByUrl('/calibres');
+        this.tipoArmaService.update(tipoArma).subscribe({
+          next: (tipoArmaAlterado) => {
+            this.router.navigateByUrl('/tiposarma');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -76,11 +77,11 @@ export class CalibreFormComponent {
 
   excluir() {
     if (this.formGroup.valid) {
-      const calibre = this.formGroup.value;
-      if (calibre.id != null) {
-        this.calibreService.delete(calibre).subscribe({
+      const tipoArma = this.formGroup.value;
+      if (tipoArma.id != null) {
+        this.tipoArmaService.delete(tipoArma).subscribe({
           next: () => {
-            this.router.navigateByUrl('/calibres');
+            this.router.navigateByUrl('/tiposarma');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));
@@ -89,5 +90,4 @@ export class CalibreFormComponent {
       }
     }
   }
-
 }

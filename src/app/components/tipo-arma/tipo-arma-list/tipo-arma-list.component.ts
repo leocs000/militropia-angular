@@ -6,33 +6,33 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { Calibre } from '../../../models/calibre.model';
-import { CalibreService } from '../../../services/calibre.service';
+import { TipoArma } from '../../../models/tipo-arma.model';
+import { TipoArmaService } from '../../../services/tipo-arma.service';
 
 @Component({
-  selector: 'app-calibre-list',
+  selector: 'app-tipo-arma-list',
   standalone: true,
   imports: [NgFor, MatButtonModule, RouterModule, MatIconModule, MatTableModule, 
     MatToolbarModule, MatPaginatorModule],
-  templateUrl: './calibre-list.component.html',
-  styleUrl: './calibre-list.component.css'
+  templateUrl: './tipo-arma-list.component.html',
+  styleUrl: './tipo-arma-list.component.css'
 })
-export class CalibreListComponent implements OnInit{
-  displayedColumns: string[] = ['id', 'calibre', 'acao']; 
-  calibres: Calibre[] = [];
+export class TipoArmaListComponent implements OnInit{
+  displayedColumns: string[] = ['id', 'descricao', 'acao']; 
+  tiposArma: TipoArma[] = [];
 
   totalRecords = 0;
   pageSize = 10;
   page = 0;
 
-  constructor(private calibreService: CalibreService){}
+  constructor(private tipoArmaService: TipoArmaService){}
 
   ngOnInit(): void {
-    this.calibreService.findAll(this.page, this.pageSize).subscribe(data => {
-      this.calibres = data;
+    this.tipoArmaService.findAll(this.page, this.pageSize).subscribe(data => {
+      this.tiposArma = data;
     });
 
-    this.calibreService.count().subscribe(data => { 
+    this.tipoArmaService.count().subscribe(data => { 
       this.totalRecords = data
     });
   }
@@ -43,9 +43,9 @@ export class CalibreListComponent implements OnInit{
     this.ngOnInit();
   }
 
-  excluir(calibre: Calibre) {
-    if (calibre.id != null) {
-      this.calibreService.delete(calibre).subscribe({
+  excluir(tipoArma: TipoArma) {
+    if (tipoArma.id != null) {
+      this.tipoArmaService.delete(tipoArma).subscribe({
         next: () => {
           window.location.reload();
         },

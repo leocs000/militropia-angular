@@ -26,6 +26,12 @@ import { MaterialFormComponent } from './components/material/material-form/mater
 import { TipoTiroListComponent } from './components/tipo-tiro/tipo-tiro-list/tipo-tiro-list.component';
 import { tipoTiroResolver } from './components/tipo-tiro/resolver/tipo-tiro.resolver';
 import { TipoTiroFormComponent } from './components/tipo-tiro/tipo-tiro-form/tipo-tiro-form.component';
+import { calibreResolver } from './components/calibre/resolver/calibre.resolver';
+import { CalibreListComponent } from './components/calibre/calibre-list/calibre-list.component';
+import { CalibreFormComponent } from './components/calibre/calibre-form/calibre-form.component';
+import { tipoArmaResolver } from './components/tipo-arma/resolver/tipo-arma.resolver';
+import { TipoArmaListComponent } from './components/tipo-arma/tipo-arma-list/tipo-arma-list.component';
+import { TipoArmaFormComponent } from './components/tipo-arma/tipo-arma-form/tipo-arma-form.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/armas', pathMatch: 'full'},
@@ -64,5 +70,13 @@ export const routes: Routes = [
 
     {path: 'tipotiros', component: TipoTiroListComponent, title: 'Listagem dos Tipos de Tiros'},
     {path: 'tipotiros/new',component: TipoTiroFormComponent, title: 'Novo Tipo de Tiro'},
-    {path: 'tipotiros/edit/:id',component: TipoTiroFormComponent, resolve: {tipoTiro: tipoTiroResolver}}
+    {path: 'tipotiros/edit/:id',component: TipoTiroFormComponent, resolve: {tipoTiro: tipoTiroResolver}},
+
+    {path: 'calibres', component: CalibreListComponent, title: 'Listagem de calibres'},
+    {path: 'calibres/new',component: CalibreFormComponent, title: 'Novo Calibre'},
+    {path: 'calibres/edit/:id',component: CalibreFormComponent, resolve: {calibre: calibreResolver}},
+
+    {path: 'tiposarma', component: TipoArmaListComponent, title: 'Listagem dos Tipos de Armas'},
+    {path: 'tiposarma/new',component: TipoArmaFormComponent, title: 'Novo Tipo de Arma'},
+    {path: 'tiposarma/edit/:id',component: TipoArmaFormComponent, resolve: {tipoArma: tipoArmaResolver}},
 ];

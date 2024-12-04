@@ -13,7 +13,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
   selector: 'app-acabamento-list',
   standalone: true,
   imports: [NgFor, MatButtonModule, RouterModule, MatIconModule, MatTableModule, 
-            MatToolbarModule, MatPaginatorModule],
+    MatToolbarModule, MatPaginatorModule],
   templateUrl: './acabamento-list.component.html',
   styleUrl: './acabamento-list.component.css'
 })
