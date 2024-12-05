@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { Location, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,16 +19,17 @@ import { MaterialService } from '../../../services/material.service';
 import { AcabamentoService } from '../../../services/acabamento.service';
 import { TipoTiroService } from '../../../services/tipo-tiro.service';
 import { CalibreService } from '../../../services/calibre.service';
-import { PageEvent } from '@angular/material/paginator';
 import { forkJoin } from 'rxjs';
 import { TipoArmaService } from '../../../services/tipo-arma.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-arma-form',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule, MatFormFieldModule,
+  imports: [NgIf, NgFor, ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatButtonModule, MatCardModule, MatToolbarModule,
-    RouterModule, MatSelectModule],
+    RouterModule, MatSelectModule, MatIconModule],
   templateUrl: './arma-form.component.html',
   styleUrl: './arma-form.component.css'
 })
@@ -42,6 +43,10 @@ export class ArmaFormComponent implements OnInit{
   acabamentos: Acabamento[] = [];
   tiposTiro: TipoTiro[] = [];
 
+  fileName: string = '';
+  selectedFile: File | null = null; 
+  imagePreview: string | ArrayBuffer | null = null;
+
   constructor(private formBuilder: FormBuilder,
     private armaService: ArmaService,
     private materialService: MaterialService,
@@ -50,7 +55,8 @@ export class ArmaFormComponent implements OnInit{
     private acabamentoService: AcabamentoService,
     private tiposTiroService: TipoTiroService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private location: Location) {
 
     //inicializando
     this.formGroup = this.formBuilder.group({
@@ -100,6 +106,10 @@ export class ArmaFormComponent implements OnInit{
     
   }
 
+  voltarPagina() {
+    this.location.back();
+  }
+
   initializeForm(): void{
     const arma: Arma = this.activatedRoute.snapshot.data['arma'];
 
@@ -109,6 +119,12 @@ export class ArmaFormComponent implements OnInit{
     const tipoArma = this.tiposArma.find(tipoArma => tipoArma.id === (arma?.tipo?.id || null));
     const acabamento = this.acabamentos.find(acabamento => acabamento.id === (arma?.acabamento?.id || null));
     const tipoTiro = this.tiposTiro.find(tipoTiro => tipoTiro.id === (arma?.tipoTiro?.id || null));
+
+    // carregando a imagem do preview
+    if (arma && arma.nomeImagem) {
+      this.imagePreview = this.armaService.getUrlImage(arma.nomeImagem);
+      this.fileName = arma.nomeImagem;
+    }
 
     this.formGroup = this.formBuilder.group({
       id:[(arma && arma.id) ? arma.id : null],
@@ -128,6 +144,57 @@ export class ArmaFormComponent implements OnInit{
       velocidade:[(arma && arma.velocidade) ? arma.velocidade : ''],
       capacidadeDeTiro: [(arma && arma.capacidadeDeTiro) ? arma.capacidadeDeTiro : ''],
     });
+  }
+
+  tratarErros(errorResponse: HttpErrorResponse) {
+
+    if (errorResponse.status === 400) {
+      if (errorResponse.error?.errors) {
+        errorResponse.error.errors.forEach((validationError: any) => {
+          const formControl = this.formGroup.get(validationError.fieldName);
+
+          if (formControl) {
+            formControl.setErrors({apiError: validationError.message})
+          }
+
+        });
+      }
+    } else if (errorResponse.status < 400){
+      alert(errorResponse.error?.message || 'Erro genérico do envio do formulário.');
+    } else if (errorResponse.status >= 500) {
+      alert('Erro interno do servidor.');
+    }
+
+  }
+
+  carregarImagemSelecionada(event: any) {
+    this.selectedFile = event.target.files[0];
+
+    if (this.selectedFile) {
+      this.fileName = this.selectedFile.name;
+      // carregando image preview
+      const reader = new FileReader();
+      reader.onload = e => this.imagePreview = reader.result;
+      reader.readAsDataURL(this.selectedFile);
+    }
+
+  }
+
+  private uploadImage(faixaId: number) {
+    if (this.selectedFile) {
+      this.armaService.uploadImage(faixaId, this.selectedFile.name, this.selectedFile)
+      .subscribe({
+        next: () => {
+          this.voltarPagina();
+        },
+        error: err => {
+          console.log('Erro ao fazer o upload da imagem');
+          // tratar o erro
+        }
+      })
+    } else {
+      this.voltarPagina();
+    }
   }
 
   salvar() {
