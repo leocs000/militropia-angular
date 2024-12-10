@@ -180,9 +180,9 @@ export class ArmaFormComponent implements OnInit{
 
   }
 
-  private uploadImage(faixaId: number) {
+  private uploadImage(armaId: number) {
     if (this.selectedFile) {
-      this.armaService.uploadImage(faixaId, this.selectedFile.name, this.selectedFile)
+      this.armaService.uploadImage(armaId, this.selectedFile.name, this.selectedFile)
       .subscribe({
         next: () => {
           this.voltarPagina();
