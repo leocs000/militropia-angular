@@ -30,11 +30,13 @@ import { ArmaCardListComponent } from './components/arma/arma-card-list/arma-car
 import { CarrinhoComponent } from './components/carrinho/carrinho/carrinho.component';
 import { AdminTemplateComponent } from './components/template/admin-template/admin-template.component';
 import { UserTemplateComponent } from './components/template/user-template/user-template.component';
+import { authGuard } from './guard/auth.guard';
+import { LoginComponent } from './components/login/login/login.component';
 
 export const routes: Routes = [
     { 
         path: '', 
-       
+        component: UserTemplateComponent,
         title: 'e-commerce',
         children: [
             {path: '', pathMatch: 'full', redirectTo: 'ecommerce'},
@@ -49,21 +51,23 @@ export const routes: Routes = [
         path: 'admin', 
         component: AdminTemplateComponent, 
         title: 'Administração',
-//        canActivate: [authGuard],
+        
         children: [
             {path: '', pathMatch: 'full', redirectTo: 'armas'},
             
+            {path: 'login', component: LoginComponent, title: 'Login de Usuario'},
+
             {path: 'armas', component: ArmaListComponent, title: 'Lista de Armas'},
-            {path: 'armas/new', component: ArmaFormComponent, title: 'Cadastrar Arma'},
-            {path: 'armas/edit/:id', component: ArmaFormComponent, resolve: {arma: armaResolver}},
+            {path: 'armas/new', component: ArmaFormComponent, title: 'Cadastrar Arma', canActivate: [authGuard]},
+            {path: 'armas/edit/:id', component: ArmaFormComponent, resolve: {arma: armaResolver}, canActivate: [authGuard]},
 
             {path: 'enderecos',component: EnderecoListComponent, title: 'Lista de Enderecos'},
             {path: 'enderecos/new',component: EnderecoFormComponent, title: 'Novo Endereco'},
             {path: 'enderecos/edit/:id',component: EnderecoFormComponent, resolve: {endereco: enderecoResolver}},
             
             {path: 'funcionarios',component: FuncionarioListComponent, title: 'Lista de Funcionarios'},
-            {path: 'funcionarios/new',component: FuncionarioFormComponent, title: 'Novo Funcionario'},
-            {path: 'funcionarios/edit/:id',component: FuncionarioFormComponent, resolve: {funcionario: funcionarioResolver}},
+            {path: 'funcionarios/new',component: FuncionarioFormComponent, title: 'Novo Funcionario', canActivate: [authGuard]},
+            {path: 'funcionarios/edit/:id',component: FuncionarioFormComponent, resolve: {funcionario: funcionarioResolver}, canActivate: [authGuard]},
 
             {path: 'clientes',component: ClienteListComponent, title: 'Lista de Clientes'},
             {path: 'clientes/new',component: ClienteFormComponent, title: 'Novo Cliente'},

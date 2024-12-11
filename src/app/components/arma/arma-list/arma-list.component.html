@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <div class="flex-container">
     <span class="toolbar-title">Controle de Armas</span>
-    <button mat-fab color="accent" routerLink="/armas/new">
+    <button mat-fab color="accent" routerLink="/admin/armas/new">
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -25,7 +25,7 @@
   <ng-container matColumnDef="acao">
     <th mat-header-cell *matHeaderCellDef> Ação </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" routerLink="/armas/edit/{{element.id}}">
+      <button mat-icon-button color="primary" routerLink="/admin/armas/edit/{{element.id}}">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-icon-button

@@ -44,7 +44,7 @@ export class AuthService {
           if (authToken) {
             this.setToken(authToken);
             const usuarioLogado = res.body;
-            //console.log(usuarioLogado);
+            console.log(usuarioLogado);
             if (usuarioLogado) {
               this.setUsuarioLogado(usuarioLogado);
               this.usuarioLogadoSubject.next(usuarioLogado);
@@ -85,7 +85,11 @@ export class AuthService {
             return true;
         }
         try {
-            return this.jwtHelper.isTokenExpired(token);
+            const isExpired = this.jwtHelper.isTokenExpired(token);
+            if(isExpired){
+                this.removeToken();
+            }
+            return isExpired;
         } catch (error) {
             console.error('Token invalido', error);
             return true;
