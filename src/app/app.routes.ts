@@ -32,8 +32,11 @@ import { AdminTemplateComponent } from './components/template/admin-template/adm
 import { UserTemplateComponent } from './components/template/user-template/user-template.component';
 import { authGuard } from './guard/auth.guard';
 import { LoginComponent } from './components/login/login/login.component';
+import { LoginUsuarioComponent } from './components/usuario/login-suario/login-usuario.component';
+import { CadastroUsuarioComponent } from './components/usuario/cadastro-usuario/cadastro-usuario.component';
 
 export const routes: Routes = [
+    { path: 'ecommerce', component: ArmaCardListComponent, title: 'Pipoco Silencioso'},
     { 
         path: '', 
         component: UserTemplateComponent,
@@ -42,6 +45,20 @@ export const routes: Routes = [
             {path: '', pathMatch: 'full', redirectTo: 'ecommerce'},
         
             { path: 'ecommerce', component: ArmaCardListComponent, title: 'Pipoco Silencioso'},
+
+            { path: 'login', component: LoginUsuarioComponent, title: 'Login de usuario'},
+            { path: 'cadastro', component: CadastroUsuarioComponent, title: 'Cadastro de Usuario'}
+
+        ]
+    },
+
+    { 
+        path: 'user', 
+        component: UserTemplateComponent,
+        title: 'Area do Usuario',
+        children: [
+            {path: '', pathMatch: 'full', redirectTo: 'ecommerce'},
+        
             { path: 'carrinho', component: CarrinhoComponent, title: 'Carrinho de Compras'},
 
         ]
@@ -49,7 +66,7 @@ export const routes: Routes = [
 
     { 
         path: 'admin', 
-        component: AdminTemplateComponent, 
+        component: AdminTemplateComponent,
         title: 'Administração',
         
         children: [

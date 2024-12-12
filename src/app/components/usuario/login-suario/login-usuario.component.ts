@@ -11,15 +11,15 @@ import { AuthService } from '../../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-login-usuario',
   standalone: true,
   imports: [NgIf, ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatButtonModule, MatCardModule, MatToolbarModule,
     RouterModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './login-usuario.component.html',
+  styleUrl: './login-usuario.component.css'
 })
-export class LoginComponent implements OnInit{
+export class LoginUsuarioComponent implements OnInit{
   loginForm!: FormGroup;
 
   constructor(
@@ -41,14 +41,10 @@ export class LoginComponent implements OnInit{
       const username = this.loginForm.get('username')?.value;
       const password = this.loginForm.get('password')?.value;
 
-      this.authService.loginADM(username, password).subscribe ({
+      this.authService.loginUsuario(username, password).subscribe ({
         next: (resp) => {
-          console.log('--------------------------------------');
-          const usus = this.authService.getUsuarioLogado();
-          console.log(usus);
-          console.log('--------------------------------------');
           // redirecionando para a pagina principal
-          this.router.navigateByUrl('/admin');
+          this.router.navigateByUrl('/ecommerce');
         },
         error: (err) => {
           console.log(err);
@@ -60,7 +56,7 @@ export class LoginComponent implements OnInit{
   }
 
   onRegister() {
-    // criar usuário
+    this.router.navigateByUrl('/cadastro');
   }
 
   showSnackbarTopPosition(content: any) {

@@ -21,8 +21,20 @@ export class SidebarComponent implements OnInit{
   ngOnInit(): void {
     this.sideBarService.sideNavToggleSubject.subscribe(
       () => {
-        this.drawer.toggle();
+        this.drawer.toggle(); 
       }
     )
   }
+
+/*   ngAfterViewInit(): void { 
+    // Inicialização que depende do drawer 
+    this.sideBarService.sideNavToggleSubject.subscribe( () => { 
+        if (this.drawer) { 
+          this.drawer.toggle(); 
+        } else { 
+          console.error('Drawer is not initialized'); 
+        } 
+      } 
+    ); 
+  } */
 }

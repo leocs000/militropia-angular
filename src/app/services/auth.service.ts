@@ -34,7 +34,31 @@ export class AuthService {
         const params = {
             login: username,
             senha: senha,
-            perfil: 1 // ADM
+            perfil: 2 // ADM
+        }
+
+        //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
+    return this.httpClient.post(`${this.baseUrl}`, params, {observe: 'response'}).pipe(
+        tap((res: any) => {
+          const authToken = res.headers.get('Authorization') ?? '';
+          if (authToken) {
+            this.setToken(authToken);
+            const usuarioLogado = res.body;
+            console.log(usuarioLogado);
+            if (usuarioLogado) {
+              this.setUsuarioLogado(usuarioLogado);
+              this.usuarioLogadoSubject.next(usuarioLogado);
+            }
+          }
+        })
+      );
+    }
+
+    public loginUsuario(username: string, senha: string): Observable<any> {
+        const params = {
+            login: username,
+            senha: senha,
+            perfil: 1 // usuario comum
         }
 
         //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
