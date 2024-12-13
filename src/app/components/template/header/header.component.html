@@ -1,11 +1,16 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="warn">
     <button (click)="clickMenu()" mat-icon-button>
         <mat-icon>menu</mat-icon>
     </button>
     
     <span>Pipoco Silencioso</span>
 
-    <span class="faixa-spacer"></span>
+    <span class="example-spacer"></span>
+
+    <button class="demo-section" mat-icon-button routerLink="/user/carrinho">
+      <mat-icon matBadge="{{totalItensCarrinho}}" matBadgeColor="warn" matBadgePosition="above before" aria-hidden="false">shopping_cart</mat-icon>
+    </button>
+    
 
     <button  mat-icon-button (click)="deslogar()">
       <mat-icon>exit_to_app</mat-icon>

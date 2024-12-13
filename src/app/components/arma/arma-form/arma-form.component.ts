@@ -203,7 +203,7 @@ export class ArmaFormComponent implements OnInit{
       if (arma.id == null) {
         this.armaService.insert(arma).subscribe({
           next: (armaCadastrado) => {
-            this.router.navigateByUrl('/armas');
+            this.router.navigateByUrl('/admin/armas');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -212,7 +212,7 @@ export class ArmaFormComponent implements OnInit{
       } else {
         this.armaService.update(arma).subscribe({
           next: (armaAlterado) => {
-            this.router.navigateByUrl('/armas');
+            this.router.navigateByUrl('/admin/armas');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -228,7 +228,7 @@ export class ArmaFormComponent implements OnInit{
       if (arma.id != null) {
         this.armaService.delete(arma).subscribe({
           next: () => {
-            this.router.navigateByUrl('/armas');
+            this.router.navigateByUrl('/admin/armas');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));

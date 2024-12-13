@@ -70,7 +70,7 @@ export class FuncionarioFormComponent implements OnInit{
       const novoFuncionario = this.formGroup.value;
       this.funcionarioService.insert(novoFuncionario).subscribe({
         next: (funcionarioCadastrado) => {
-          this.router.navigateByUrl('/funcionarios');
+          this.router.navigateByUrl('/admin/funcionarios');
         },
         error: (err) => {
           console.log('Erro ao salvar', + JSON.stringify(err));
@@ -86,7 +86,7 @@ export class FuncionarioFormComponent implements OnInit{
       if (funcionario.id ==null) {
         this.funcionarioService.insert(funcionario).subscribe({
           next: (funcionarioCadastrado) => {
-            this.router.navigateByUrl('/funcionarios');
+            this.router.navigateByUrl('/admin/funcionarios');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -95,7 +95,7 @@ export class FuncionarioFormComponent implements OnInit{
       } else {
         this.funcionarioService.update(funcionario).subscribe({
           next: (funcionarioAlterado) => {
-            this.router.navigateByUrl('/funcionarios');
+            this.router.navigateByUrl('/admin/funcionarios');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));

@@ -55,7 +55,7 @@ export class CalibreFormComponent {
         console.log("entrou no new");
         this.calibreService.insert(calibre).subscribe({
           next: (grupoCadastrado) => {
-            this.router.navigateByUrl('/calibres');
+            this.router.navigateByUrl('/admin/calibres');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -64,7 +64,7 @@ export class CalibreFormComponent {
       } else {
         this.calibreService.update(calibre).subscribe({
           next: (calibreAlterado) => {
-            this.router.navigateByUrl('/calibres');
+            this.router.navigateByUrl('/admin/calibres');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -80,7 +80,7 @@ export class CalibreFormComponent {
       if (calibre.id != null) {
         this.calibreService.delete(calibre).subscribe({
           next: () => {
-            this.router.navigateByUrl('/calibres');
+            this.router.navigateByUrl('/admin/calibres');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));

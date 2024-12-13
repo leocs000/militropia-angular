@@ -1,4 +1,25 @@
+.mat-icon {
+    position: relative;
+}
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .demo-section + .demo-section {
+    margin-top: 16px;
+  }  
+.mat-badge-content {
+    font-size: 12px; /* Ajuste o tamanho da fonte conforme necessário */ min-width: 20px; /* Define uma largura mínima para o badge */ height: 20px; /* Define uma altura fixa para o badge */ line-height: 20px; /* Centraliza o texto verticalmente */ padding: 0 6px; /* Adiciona espaço horizontal dentro do badge */ border-radius: 10px; /* Torna o badge circular */ display: flex; align-items: center; justify-content: center;
+}
+  
 .example-spacer {
     flex: 1 1 auto;
 }
 
+.centered-text {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -87,6 +87,7 @@ export class AuthService {
     }
 
     getUsuarioLogado() {
+      console.log(this.usuarioLogadoSubject.asObservable());
         return this.usuarioLogadoSubject.asObservable();
     }
 

@@ -56,7 +56,7 @@ export class TipoTiroFormComponent implements OnInit{
         console.log("entrou no new");
         this.tipoTiroService.insert(tipoTiro).subscribe({
           next: (grupoCadastrado) => {
-            this.router.navigateByUrl('/tipotiros');
+            this.router.navigateByUrl('/admin/tipotiros');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -65,7 +65,7 @@ export class TipoTiroFormComponent implements OnInit{
       } else {
         this.tipoTiroService.update(tipoTiro).subscribe({
           next: (objetoAlterado) => {
-            this.router.navigateByUrl('/tipotiros');
+            this.router.navigateByUrl('/admin/tipotiros');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -81,7 +81,7 @@ export class TipoTiroFormComponent implements OnInit{
       if (tipoTiro.id != null) {
         this.tipoTiroService.delete(tipoTiro).subscribe({
           next: () => {
-            this.router.navigateByUrl('/tipoTiros');
+            this.router.navigateByUrl('/admin/tipoTiros');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));

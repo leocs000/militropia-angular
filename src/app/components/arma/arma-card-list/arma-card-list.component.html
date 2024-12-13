@@ -1,28 +1,35 @@
 <div class="container responsive-grid">
     <mat-card *ngFor="let card of cards()">
-        
-        <img mat-card-image [src]="card.imageUrl" />
-        
-        <mat-card-title class="centered-text">{{card.titulo}}</mat-card-title>
+        <button>
+            <img mat-card-image [src]="card.imageUrl" />
+            
+            <mat-card-title class="centered-text">{{card.titulo}}</mat-card-title>
 
-        <mat-card-content class="centered-text">
-            {{card.tipo}}
-        </mat-card-content>
-        <br/>
-        <mat-card-content class="centered-text">
-            {{card.preco}}
-        </mat-card-content>
+            <mat-card-content class="centered-text">
+                {{card.tipo}}
+            </mat-card-content>
+            <br/>
+            <mat-card-content class="centered-text">
+                {{card.preco}}
+            </mat-card-content>
+        </button>
 
-        <mat-card-actions class="centered-text">
-            <button mat-button color="primary">Ver Mais ...</button>
-        </mat-card-actions>
-
-        <mat-card-footer>
+        <mat-card-footer class="centered-text">
             <button mat-button 
+                (click)="false"
+                color="accent"
+                style="width: 100%; padding: 16px; background-color: green; color: white; font-weight: bolder;">
+                Comprar
+            </button>
+
+            <button mat-button 
+                class="centered-text"
                 (click)="adicionarAoCarrinho(card)"
                 color="accent"
-                style="width: 100%; padding: 16px;">
-                Adicionar ao Carrinho
+                style="width: 20px; padding: 16px; background-color: green; color: white;">
+                
+                <mat-icon>shopping_cart</mat-icon>
+                
             </button>
         </mat-card-footer>
 

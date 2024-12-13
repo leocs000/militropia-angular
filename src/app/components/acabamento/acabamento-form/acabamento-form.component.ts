@@ -58,7 +58,7 @@ export class AcabamentoFormComponent implements OnInit{
         console.log("entrou no new");
         this.acabamentoService.insert(acabamento).subscribe({
           next: (grupoCadastrado) => {
-            this.router.navigateByUrl('/acabamentos');
+            this.router.navigateByUrl('/admin/acabamentos');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -67,7 +67,7 @@ export class AcabamentoFormComponent implements OnInit{
       } else {
         this.acabamentoService.update(acabamento).subscribe({
           next: (acabamentoAlterado) => {
-            this.router.navigateByUrl('/acabamentos');
+            this.router.navigateByUrl('/admin/acabamentos');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));

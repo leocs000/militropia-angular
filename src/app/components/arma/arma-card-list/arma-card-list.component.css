@@ -4,6 +4,23 @@ img {
     object-fit: cover;
 }
 
+button{
+    border: none;
+    background-color: white;
+    border-radius: 6px;
+    margin: 5px;
+}
+
+mat-card{
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+mat-icon{
+    margin: 0px;
+}
+
 .container {
     padding: 20px;
 }

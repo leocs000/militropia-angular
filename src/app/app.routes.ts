@@ -36,13 +36,12 @@ import { LoginUsuarioComponent } from './components/usuario/login-suario/login-u
 import { CadastroUsuarioComponent } from './components/usuario/cadastro-usuario/cadastro-usuario.component';
 
 export const routes: Routes = [
-    { path: 'ecommerce', component: ArmaCardListComponent, title: 'Pipoco Silencioso'},
     { 
         path: '', 
         component: UserTemplateComponent,
         title: 'e-commerce',
         children: [
-            {path: '', pathMatch: 'full', redirectTo: 'ecommerce'},
+            { path: '', pathMatch: 'full', redirectTo: 'ecommerce'},
         
             { path: 'ecommerce', component: ArmaCardListComponent, title: 'Pipoco Silencioso'},
 
@@ -56,10 +55,15 @@ export const routes: Routes = [
         path: 'user', 
         component: UserTemplateComponent,
         title: 'Area do Usuario',
+        canActivate: [authGuard],
         children: [
-            {path: '', pathMatch: 'full', redirectTo: 'ecommerce'},
+            { path: '', pathMatch: 'full', redirectTo: 'ecommerce'},
         
-            { path: 'carrinho', component: CarrinhoComponent, title: 'Carrinho de Compras'},
+            { path: 'carrinho', component: CarrinhoComponent, title: 'Carrinho de Compras', canActivate: [authGuard]},
+
+            { path: 'enderecos',component: EnderecoListComponent, title: 'Lista de Enderecos'},
+            { path: 'enderecos/new',component: EnderecoFormComponent, title: 'Novo Endereco'},
+            { path: 'enderecos/edit/:id',component: EnderecoFormComponent, resolve: {endereco: enderecoResolver}},
 
         ]
     },
@@ -77,10 +81,6 @@ export const routes: Routes = [
             {path: 'armas', component: ArmaListComponent, title: 'Lista de Armas'},
             {path: 'armas/new', component: ArmaFormComponent, title: 'Cadastrar Arma', canActivate: [authGuard]},
             {path: 'armas/edit/:id', component: ArmaFormComponent, resolve: {arma: armaResolver}, canActivate: [authGuard]},
-
-            {path: 'enderecos',component: EnderecoListComponent, title: 'Lista de Enderecos'},
-            {path: 'enderecos/new',component: EnderecoFormComponent, title: 'Novo Endereco'},
-            {path: 'enderecos/edit/:id',component: EnderecoFormComponent, resolve: {endereco: enderecoResolver}},
             
             {path: 'funcionarios',component: FuncionarioListComponent, title: 'Lista de Funcionarios'},
             {path: 'funcionarios/new',component: FuncionarioFormComponent, title: 'Novo Funcionario', canActivate: [authGuard]},
@@ -88,7 +88,7 @@ export const routes: Routes = [
 
             {path: 'clientes',component: ClienteListComponent, title: 'Lista de Clientes'},
             {path: 'clientes/new',component: ClienteFormComponent, title: 'Novo Cliente'},
-            {path: 'cliente/edit/:id',component: ClienteFormComponent, resolve: {cliente: clienteResolver}},
+            {path: 'clientes/edit/:id',component: ClienteFormComponent, resolve: {cliente: clienteResolver}},
 
             {path: 'acabamentos',component: AcabamentoListComponent, title: 'Lista de Acabamentos'},
             {path: 'acabamentos/new',component: AcabamentoFormComponent, title: 'Novo acabamento'},

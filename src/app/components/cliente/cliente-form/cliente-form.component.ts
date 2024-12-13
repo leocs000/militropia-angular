@@ -64,7 +64,7 @@ export class ClienteFormComponent {
       const novoCliente = this.formGroup.value;
       this.clienteService.insert(novoCliente).subscribe({
         next: (clienteCadastrado) => {
-          this.router.navigateByUrl('/clientes');
+          this.router.navigateByUrl('/admin/clientes');
         },
         error: (err) => {
           console.log('Erro ao salvar', + JSON.stringify(err));
@@ -80,7 +80,7 @@ export class ClienteFormComponent {
       if (cliente.id ==null) {
         this.clienteService.insert(cliente).subscribe({
           next: (clienteCadastrado) => {
-            this.router.navigateByUrl('/clientes');
+            this.router.navigateByUrl('/admin/clientes');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -89,7 +89,7 @@ export class ClienteFormComponent {
       } else {
         this.clienteService.update(cliente).subscribe({
           next: (clienteAlterado) => {
-            this.router.navigateByUrl('/clientes');
+            this.router.navigateByUrl('/admin/clientes');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -105,7 +105,7 @@ export class ClienteFormComponent {
       if (cliente.id != null) {
         this.clienteService.delete(cliente).subscribe({
           next: () => {
-            this.router.navigateByUrl('/clientes');
+            this.router.navigateByUrl('/admin/clientes');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));

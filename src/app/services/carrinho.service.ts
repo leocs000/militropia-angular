@@ -48,6 +48,10 @@ export class CarrinhoService {
     return this.carrinhoSubject.value;
   }
 
+  contarItens(): number { 
+    return this.carrinhoSubject.value.reduce((total, item) => total + item.quantidade, 0); 
+  }
+
   private atualizarArmazenamentoLocal(): void {
     this.localStorageService.setItem('carrinho', this.carrinhoSubject.value);
   }

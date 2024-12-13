@@ -1,15 +1,43 @@
 <!-- carrinho.component.html -->
-<ng-container *ngIf="carrinhoItens.length > 0; else carrinhoVazio">
-    <div *ngFor="let item of carrinhoItens" >
-      <h3>{{ item.nome }}</h3>
-      <p>Preço: {{ item.preco }}</p>
-      <p>Quantidade: {{ item.quantidade }}</p>
-      <p>Total: {{ item.quantidade * item.preco }}</p>
-      <button mat-raised-button color="warn" (click)="removerItem(item)">Remover do Carrinho</button>
+<div class="carrinho-container">
+  
+  <div class="itens-carrinho">
+    <h2 id="h2">Carrinho</h2>
+    <div class="carrinho-item" *ngFor="let item of carrinhoItens">
+
+      <img [src]="item.imageUrl" alt="{{ item.imageUrl }}" class="item-imagem">
+      <div class="item-detalhes">
+        <span class="item-nome">{{ item.nome }}</span>
+        <span class="item-preco">{{ item.preco | currency:'BRL' }}</span>
+      </div>
+      <div class="item-quantidade">
+        <mat-label>Quantidade</mat-label>
+        <div>
+          <button mat-icon-button (click)="decrementarQuantidade(item)">&#60;</button>
+          <span>{{ item.quantidade }}</span>
+          <button mat-icon-button (click)="incrementarQuantidade(item)">&#62;</button>
+        </div>
+        
+      </div>
+      <div class="item-total">
+        <mat-label>Total</mat-label>
+        <span >{{ item.quantidade * item.preco | currency:'BRL' }}</span>
+      </div>
+      
+      <button mat-icon-button color="warn" (click)="removerItem(item)">
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
-    <p>Total do Carrinho: {{ calcularTotal() }}</p>
-    <button mat-raised-button color="primary" (click)="finalizarCompra()" >Finalizar Compra</button>
-  </ng-container>
-  <ng-template #carrinhoVazio>
+  </div>
+  <div class="resumo-compra">
+    <h2>Resumo</h2>
+    <p>Total da Compra: {{ calcularTotal() | currency:'BRL' }}</p>
+    <button mat-raised-button color="primary" (click)="finalizarCompra()">Finalizar Compra</button>
+    <button mat-raised-button color="primary" routerLink="/ecommerce">Continuar comprando</button>
+  </div>
+</div>
+<ng-template #carrinhoVazio>
+  <div class="carrinho-vazio">
     <p>O carrinho está vazio.</p>
-  </ng-template>
+  </div>
+</ng-template>

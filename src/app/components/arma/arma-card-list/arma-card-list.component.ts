@@ -6,6 +6,8 @@ import { Arma } from '../../../models/arma.model';
 import { ArmaService } from '../../../services/arma.service';
 import { CarrinhoService } from '../../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SidebarComponent } from '../../template/sidebar/sidebar.component';
+import { MatIcon } from '@angular/material/icon';
 
 type Card = {
   idArma: number,
@@ -19,7 +21,7 @@ type Card = {
   selector: 'app-arma-card-list',
   standalone: true,
   imports: [MatCardModule, MatButtonModule, NgFor, 
-    MatCardActions, MatCardContent, MatCardTitle, MatCardFooter],
+    MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, SidebarComponent, MatIcon],
   templateUrl: './arma-card-list.component.html',
   styleUrl: './arma-card-list.component.css'
 })
@@ -65,7 +67,8 @@ export class ArmaCardListComponent {
       id: card.idArma,
       nome: card.titulo,
       preco: card.preco,
-      quantidade: 1
+      quantidade: 1,
+      imageUrl: card.imageUrl
     });
   }
 

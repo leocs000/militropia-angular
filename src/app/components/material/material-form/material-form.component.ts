@@ -58,7 +58,7 @@ export class MaterialFormComponent {
         console.log("entrou no new");
         this.materialService.insert(material).subscribe({
           next: (grupoCadastrado) => {
-            this.router.navigateByUrl('/materiais');
+            this.router.navigateByUrl('/admin/materiais');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -67,7 +67,7 @@ export class MaterialFormComponent {
       } else {
         this.materialService.update(material).subscribe({
           next: (acabamentoAlterado) => {
-            this.router.navigateByUrl('/materiais');
+            this.router.navigateByUrl('/admin/materiais');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -83,7 +83,7 @@ export class MaterialFormComponent {
       if (material.id != null) {
         this.materialService.delete(material).subscribe({
           next: () => {
-            this.router.navigateByUrl('/acabamentos');
+            this.router.navigateByUrl('/admin/acabamentos');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));

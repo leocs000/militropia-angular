@@ -56,7 +56,7 @@ export class TipoArmaFormComponent implements OnInit{
         console.log("entrou no new");
         this.tipoArmaService.insert(tipoArma).subscribe({
           next: (grupoCadastrado) => {
-            this.router.navigateByUrl('/tiposarma');
+            this.router.navigateByUrl('/admin/tiposarma');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -65,7 +65,7 @@ export class TipoArmaFormComponent implements OnInit{
       } else {
         this.tipoArmaService.update(tipoArma).subscribe({
           next: (tipoArmaAlterado) => {
-            this.router.navigateByUrl('/tiposarma');
+            this.router.navigateByUrl('/admin/tiposarma');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -81,7 +81,7 @@ export class TipoArmaFormComponent implements OnInit{
       if (tipoArma.id != null) {
         this.tipoArmaService.delete(tipoArma).subscribe({
           next: () => {
-            this.router.navigateByUrl('/tiposarma');
+            this.router.navigateByUrl('/admin/tiposarma');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));
