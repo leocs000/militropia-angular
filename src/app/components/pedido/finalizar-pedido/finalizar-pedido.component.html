@@ -1,0 +1,53 @@
+<!-- pagamento.component.html -->
+<div class="pagamento-container">
+    <div class="itens-carrinho">
+        <h2 id="h2">Carrinho</h2>
+        <div class="carrinho-item" *ngFor="let item of carrinhoItens">
+    
+          <img [src]="item.imageUrl" alt="{{ item.imageUrl }}" class="item-imagem">
+          <div class="item-detalhes">
+            <span class="item-nome">{{ item.nome }}</span>
+            <span class="item-preco">{{ item.preco | currency:'BRL' }}</span>
+          </div>
+          <div class="item-quantidade">
+            <mat-label>Quantidade</mat-label>
+            <div>
+              <span>{{ item.quantidade }}</span>
+            </div>
+            
+          </div>
+          <div class="item-total">
+            <mat-label>Total</mat-label>
+            <span >{{ item.quantidade * item.preco | currency:'BRL' }}</span>
+          </div>
+        </div>
+      </div>
+    <div class="resumo-compra">
+      <h2>Resumo</h2>
+      <p>Total da Compra: {{ calcularTotal() | currency:'BRL' }}</p>
+      <mat-form-field>
+        <mat-label>Frete</mat-label>
+        <input matInput [value]="frete" (input)="atualizarFrete($event)">
+      </mat-form-field>
+      <h3>Dados do Cliente</h3>
+      <p>Nome: {{ cliente.nome }}</p>
+      <p>CPF: {{ cliente.cpf }}</p>
+      <p>Email: {{ cliente.email }}</p>
+      <p>Telefone: {{ cliente.listaTelefones.join(', ') }}</p>
+      <h3>Endereço</h3>
+      <p>{{ cliente.enderecos[0].nome }}</p>
+      <p>{{ cliente.enderecos[0].logradouro }}, {{ cliente.enderecos[0].numero }}</p>
+      <p>{{ cliente.enderecos[0].complemento }}</p>
+      <p>{{ cliente.enderecos[0].bairro }}</p>
+      <p>{{ cliente.enderecos[0].cep }}</p>
+      <p>{{ cliente.enderecos[0].cidade }} - {{ cliente.enderecos[0].estado }}</p>
+      <h3>Forma de Pagamento</h3>
+      <mat-radio-group [value]="formaDePagamentoSelecionada" (change)="selecionarFormaDePagamento($event)">
+        <mat-radio-button *ngFor="let forma of formasDePagamento" [value]="forma.id">
+          {{ forma.label }}
+        </mat-radio-button>
+      </mat-radio-group>
+      <button mat-raised-button color="primary" (click)="finalizarCompra()">Finalizar Compra</button>
+    </div>
+  </div>
+  

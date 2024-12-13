@@ -52,10 +52,10 @@ export class ClienteFormComponent {
       nome: [(cliente && cliente.nome) ? cliente.nome : '', Validators.required],
       cpf: [(cliente && cliente.cpf) ? cliente.cpf : '', Validators.required],
       email: [(cliente && cliente.email) ? cliente.email : '', Validators.required],
-      telefone: [(cliente && cliente.telefone) ? cliente.telefone : '', Validators.required],
-      numeroRegistro_posse_porte: [(cliente && cliente.numeroRegistro_posse_porte) ? cliente.numeroRegistro_posse_porte : '', Validators.required],
+      telefone: [(cliente && cliente.listaTelefones) ? cliente.listaTelefones : '', Validators.required],
+/*       numeroRegistro_posse_porte: [(cliente && cliente.numeroRegistro_posse_porte) ? cliente.numeroRegistro_posse_porte : '', Validators.required],
       login: [(cliente && cliente.login) ? cliente.login : '', Validators.required],
-      senha: [(cliente && cliente.senha) ? cliente.senha : '', Validators.required]
+      senha: [(cliente && cliente.senha) ? cliente.senha : '', Validators.required] */
     });
   }
 

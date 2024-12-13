@@ -63,10 +63,6 @@ export class CarrinhoComponent {
   }
 
   finalizarCompra() {
-
-    // verifidcar se estah logado
-
-    // 
-
+    this.router.navigate(['/user/finalizarpedido']);//, { state: { carrinhoItens: this.carrinhoItens } });
   }
 }

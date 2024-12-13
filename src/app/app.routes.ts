@@ -34,6 +34,7 @@ import { authGuard } from './guard/auth.guard';
 import { LoginComponent } from './components/login/login/login.component';
 import { LoginUsuarioComponent } from './components/usuario/login-suario/login-usuario.component';
 import { CadastroUsuarioComponent } from './components/usuario/cadastro-usuario/cadastro-usuario.component';
+import { FinalizarPedidoComponent } from './components/pedido/finalizar-pedido/finalizar-pedido.component';
 
 export const routes: Routes = [
     { 
@@ -64,6 +65,10 @@ export const routes: Routes = [
             { path: 'enderecos',component: EnderecoListComponent, title: 'Lista de Enderecos'},
             { path: 'enderecos/new',component: EnderecoFormComponent, title: 'Novo Endereco'},
             { path: 'enderecos/edit/:id',component: EnderecoFormComponent, resolve: {endereco: enderecoResolver}},
+
+//            { path: 'pedidos',component: EnderecoListComponent, title: 'Lista de Enderecos'},
+
+            { path: 'finalizarpedido',component: FinalizarPedidoComponent, title: 'Resumo do pedido'},
 
         ]
     },

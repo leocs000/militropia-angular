@@ -1,10 +1,12 @@
+import { Endereco } from "./endereco.model";
+import { Usuario } from "./usuario.model";
+
 export class Cliente {
     id!: number;
     nome!: string;
     cpf!: string;
     email!: string;
-    telefone!: string;
-    numeroRegistro_posse_porte!: string;
-    login!: string;
-    senha!: string;
+    listaTelefones!: string[];
+    enderecos!: Endereco[];
+    usuario!: Usuario;
 }

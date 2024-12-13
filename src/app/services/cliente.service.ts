@@ -29,6 +29,10 @@ export class ClienteService {
     return this.httpClient.get<number>(`${this.baseUrl}/count`);
   }
 
+  findDadosPessoais(): Observable<Cliente>{
+    return this.httpClient.get<Cliente>(`${this.baseUrl}/dados-pessoais`);
+  }
+
   findById(id: string): Observable<Cliente> {
     return this.httpClient.get<Cliente>(`${this.baseUrl}/${id}`); 
   }

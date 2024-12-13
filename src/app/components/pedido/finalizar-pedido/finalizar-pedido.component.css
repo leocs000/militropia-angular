@@ -1,21 +1,11 @@
-#h2{
-    padding-left: 20px;
-}
-
-button{
-    border: none;
-    background-color: #fff;
-    cursor: pointer;
-}
-
-.carrinho-container {
+/* pagamento.component.css */
+.pagamento-container {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: hsl(0, 0%, 89%);
+    background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
   }
   
   .itens-carrinho {
@@ -58,42 +48,12 @@ button{
     gap: 5px;
   }
   
-  .item-quantidade {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .item-quantidade button{
-    margin: 0px 15px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 6px;
-    border: 1px solid gray;
-    color: grey;
-  }
-  
   .resumo-compra {
     flex: 1;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    & button{
-        padding: 16px;
-        width: 100%;
-        height: auto;
-        background-color: green;
-        color: aliceblue;
-        font-weight: 800;
-        border-radius: 6px;
-    }
-
-    & button:last-child{
-        background-color: #fff;
-        color: green;
-    }
   }
   
   .carrinho-vazio {
@@ -105,13 +65,3 @@ button{
     color: #888;
   }
   
-  .item-total{
-    margin-right: 50px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .item-nome{
-    font-size: 20px;
-    font-weight: 700;
-  }
