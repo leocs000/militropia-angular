@@ -25,8 +25,10 @@ export class CadastroUsuarioComponent {
     private router: Router,
     private usuarioService: UsuarioService) { 
       this.cadastroForm = this.formBuilder.group({ 
-        username: ['', Validators.required], 
-        password: ['', Validators.required],  
+        cpf: [' ', Validators.required], 
+        email: [' ', Validators.required],  
+        username: [' ', Validators.required], 
+        password: [' ', Validators.required],  
       }); 
     } 
     
@@ -34,10 +36,12 @@ export class CadastroUsuarioComponent {
   
   onSubmit(): void { 
     if (this.cadastroForm.valid) { 
+      const cpf = this.cadastroForm.get('cpf')?.value;
+      const email = this.cadastroForm.get('email')?.value;
       const username = this.cadastroForm.get('username')?.value;
       const password = this.cadastroForm.get('password')?.value;
 
-      this.usuarioService.create(username, password).subscribe ({
+      this.usuarioService.create(cpf, email, username, password).subscribe ({
         next: (resp) => {
           // redirecionando para a pagina principal
           this.router.navigateByUrl('/login');

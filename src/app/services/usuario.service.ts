@@ -8,13 +8,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UsuarioService {
 
-  private baseUrl = 'http://localhost:8080/usuarios';
+  private baseUrl = 'http://localhost:8080/cadastro';
 
   constructor(private httpClient: HttpClient) { }
   
-  create(usuario: string, senha: string): Observable<Usuario>{
+  create(cpf: string, email: string, login: string, senha: string): Observable<Usuario>{
     const data = {
-      login: usuario,
+      cpf: cpf,
+      email: email,
+      login: login,
       senha: senha,
       idPerfil: 1
     };

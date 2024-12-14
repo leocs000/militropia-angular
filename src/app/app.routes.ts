@@ -37,6 +37,7 @@ import { CadastroUsuarioComponent } from './components/usuario/cadastro-usuario/
 import { FinalizarPedidoComponent } from './components/pedido/finalizar-pedido/finalizar-pedido.component';
 
 export const routes: Routes = [
+    {path: 'tiposarma', component: TipoArmaListComponent, title: 'Listagem dos Tipos de Armas'},
     { 
         path: '', 
         component: UserTemplateComponent,

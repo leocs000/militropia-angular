@@ -23,7 +23,7 @@ export class ArmaService {
     formData.append('nomeImagem', imagem.name);
     formData.append('imagem', imagem, imagem.name);
     
-    return this.httpClient.patch<Arma>(`${this.baseUrl}/upload/imagem/`, formData);
+    return this.httpClient.patch<Arma>(`${this.baseUrl}/upload/imagem/${id}`, formData);
   }
   
   findAll(page?: number, pageSize?: number): Observable<Arma[]>{

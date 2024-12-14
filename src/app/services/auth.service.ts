@@ -11,6 +11,7 @@ import { Usuario } from '../models/usuario.model';
 export class AuthService {
 
   private baseUrl = 'http://localhost:8080/auth';
+  private cadastroUsuUrl = 'http://localhost:8080/cadastro';
     private tokenKey = 'jwt_token';
     private usuarioLogadoKey = 'usuario_logado';
     private usuarioLogadoSubject = new BehaviorSubject<Usuario|null>(null);
@@ -56,13 +57,13 @@ export class AuthService {
 
     public loginUsuario(username: string, senha: string): Observable<any> {
         const params = {
-            login: username,
-            senha: senha,
-            perfil: 1 // usuario comum
+          login: username,
+          senha: senha,
+          perfil: 1 // user
         }
 
         //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
-    return this.httpClient.post(`${this.baseUrl}`, params, {observe: 'response'}).pipe(
+    return this.httpClient.post(`${this.cadastroUsuUrl}`, params, {observe: 'response'}).pipe(
         tap((res: any) => {
           const authToken = res.headers.get('Authorization') ?? '';
           if (authToken) {

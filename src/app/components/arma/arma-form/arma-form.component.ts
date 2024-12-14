@@ -198,27 +198,25 @@ export class ArmaFormComponent implements OnInit{
   }
 
   salvar() {
+    this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       const arma = this.formGroup.value;
-      if (arma.id == null) {
-        this.armaService.insert(arma).subscribe({
-          next: (armaCadastrado) => {
-            this.router.navigateByUrl('/admin/armas');
-          },
-          error: (err) => {
-            console.log('Erro ao Incluir' + JSON.stringify(err));
-          }
-        });
-      } else {
-        this.armaService.update(arma).subscribe({
-          next: (armaAlterado) => {
-            this.router.navigateByUrl('/admin/armas');
-          },
-          error: (err) => {
-            console.log('Erro ao Editar' + JSON.stringify(err));
-          }
-        });
-      }
+
+      // selecionando a operacao (insert ou update)
+      const operacao = arma.id == null
+      ? this.armaService.insert(arma)
+      : this.armaService.update(arma);
+
+      // executando a operacao
+      operacao.subscribe({
+        next: (armaCadastrada) => {
+          this.uploadImage(armaCadastrada.id);
+        },
+        error: (error) => {
+          console.log('Erro ao Salvar' + JSON.stringify(error));
+          this.tratarErros(error);
+        }
+      });
     }
   }
 

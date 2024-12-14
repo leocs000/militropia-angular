@@ -1,17 +1,33 @@
 <div class="cadastro-container">
     <div class="cadastro-box">
-        <img class="cadastro-icon" src="/icons/register.svg" alt="Register">
-        <h2 class="cadastro-title">Cadastro</h2>
-        <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
-            <mat-form-field class="cadastro-input">
-                <input matInput placeholder="Username" formControlName="username" required>
-                <mat-error *ngIf="cadastroForm.get('username')!.hasError('required')">O username é obrigatório</mat-error>
-            </mat-form-field>
-            <mat-form-field class="cadastro-input">
-                <input matInput type="password" placeholder="Senha" formControlName="password" required>
-                <mat-error *ngIf="cadastroForm.get('password')!.hasError('required')">A senha é obrigatória</mat-error>
-            </mat-form-field>
-            <button mat-raised-button class="cadastro-button" color="primary" type="submit">Cadastrar</button>
-        </form>
+      <img class="cadastro-icon" src="/icons/register.svg" alt="Register">
+      <h2 class="cadastro-title">Cadastro</h2>
+      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="cadastro-input">
+          <mat-label>CPF</mat-label>
+          <input matInput placeholder="CPF" formControlName="cpf" required>
+          <mat-error *ngIf="cadastroForm.get('cpf')!.hasError('required')">O CPF é obrigatório</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="cadastro-input">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email" required>
+          <mat-error *ngIf="cadastroForm.get('email')!.hasError('required')">O Email é obrigatório</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="cadastro-input">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" formControlName="username" required>
+          <mat-error *ngIf="cadastroForm.get('username')!.hasError('required')">O username é obrigatório</mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="cadastro-input">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" placeholder="Senha" formControlName="password" required>
+          <mat-error *ngIf="cadastroForm.get('password')!.hasError('required')">A senha é obrigatória</mat-error>
+        </mat-form-field>
+        <button mat-raised-button class="cadastro-button" color="primary" type="submit">Cadastrar</button>
+      </form>
     </div>
-</div>
+  </div>
+  
