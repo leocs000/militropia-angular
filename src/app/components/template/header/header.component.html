@@ -1,19 +1,34 @@
 <mat-toolbar color="warn">
-    <button (click)="clickMenu()" mat-icon-button>
+    <!-- <button (click)="clickMenu()" mat-icon-button>
         <mat-icon>menu</mat-icon>
     </button>
     
-    <span>Pipoco Silencioso</span>
+    <span>Pipoco Silencioso</span> -->
+
+    <img src="assets/logo2.png" alt="Logo Pipoco" style="height: 50px; padding: 15px; background-color: white;">
 
     <span class="example-spacer"></span>
 
     <button class="demo-section" mat-icon-button routerLink="/user/carrinho">
       <mat-icon matBadge="{{totalItensCarrinho}}" matBadgeColor="warn" matBadgePosition="above before" aria-hidden="false">shopping_cart</mat-icon>
     </button>
-    
 
-    <button  mat-icon-button (click)="deslogar()">
+
+    <ng-container  *ngIf="usuarioLogado; else loginButton">
+      <mat-icon>account_circle</mat-icon>
+      <button mat-button [matMenuTriggerFor]="menu" class="text-white">{{ usuarioLogado.login }}</button>
+      <mat-menu #menu="matMenu" class="drop-down">
+        <button mat-menu-item routerLink="/user/perfil">Meus Dados</button>
+        <button mat-menu-item (click)="deslogar()">Deslogar</button>
+      </mat-menu>
+    </ng-container>
+    <ng-template #loginButton>
+      <button mat-button (click)="irParaLogin()" class="text-white">Login</button>
+    </ng-template>
+    
+    
+    <!-- <button  mat-icon-button (click)="deslogar()">
       <mat-icon>exit_to_app</mat-icon>
     </button>
-    <span>{{usuarioLogado?.username}}</span>
+    <span>{{usuarioLogado?.login}}</span> -->
 </mat-toolbar>

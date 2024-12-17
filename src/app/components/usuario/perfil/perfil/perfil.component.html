@@ -1,0 +1,43 @@
+<div class="user-details-container">
+    <h2>Detalhes do Usuário</h2>
+    <div class="buttons">
+        <button mat-raised-button color="primary" (click)="editarSenha()">Editar Senha</button>
+        <button mat-raised-button color="accent" (click)="editarLogin()">Editar Login</button>
+        <button mat-raised-button color="warn" (click)="alterarDados()">Alterar Dados</button>
+    </div>
+    <div class="user-info">
+      <p><strong>Nome:</strong> {{ cliente.nome }}</p>
+      <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
+      <p><strong>Email:</strong> {{ cliente.email }}</p>
+      <p><strong>Login:</strong> {{ cliente.usuario.login }}</p>
+      <p><strong>Endereço:</strong></p>
+      <div *ngFor="let endereco of cliente.enderecos"> 
+        <p><strong>Nome:</strong> {{ endereco.nome }}</p> 
+        <p><strong>CEP:</strong> {{ endereco.cep }}</p> 
+        <p><strong>Logradouro:</strong> {{ endereco.logradouro }}</p> 
+        <p><strong>Número:</strong> {{ endereco.numero }}</p> 
+        <p><strong>Complemento:</strong> {{ endereco.complemento }}</p> 
+        <p><strong>Bairro:</strong> {{ endereco.bairro }}</p> 
+        <p><strong>Cidade:</strong> {{ endereco.cidade }}</p> 
+        <p><strong>Estado:</strong> {{ endereco.estado }}</p> 
+    </div>
+    <div class="user-orders-container">
+        <h2>Pedidos do Usuário</h2>
+        <div *ngFor="let pedido of pedidos" class="pedido">
+          <h3>Pedido #{{ pedido.idPedido }}</h3>
+          <p><strong>Data:</strong> {{ pedido.data | date }}</p>
+          <p><strong>Total:</strong> {{ pedido.totalPedido| currency:'BRL' }}</p>
+          <div class="pedido-itens">
+            <h4>Itens:</h4>
+            <ul>
+              <li *ngFor="let item of pedido.itens">
+                {{item.imageUrl}}{{ item.nome }} - {{ item.quantidade }} x {{ item.preco | currency:'BRL' }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  

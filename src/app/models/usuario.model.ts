@@ -2,6 +2,6 @@ import { Perfil } from "./perfil.model";
 
 export class Usuario {
     id!: number;
-    username!: string;
+    login!: string;
     perfil!: Perfil; 
 }

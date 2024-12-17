@@ -8,11 +8,12 @@ import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import {MatRadioChange, MatRadioModule} from '@angular/material/radio';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-finalizar-pedido',
   standalone: true,
-  imports: [MatFormFieldModule, MatLabel, MatRadioModule, CommonModule],
+  imports: [MatFormFieldModule, MatLabel, MatRadioModule, CommonModule,FormsModule],
   templateUrl: './finalizar-pedido.component.html',
   styleUrl: './finalizar-pedido.component.css'
 })
@@ -20,7 +21,7 @@ export class FinalizarPedidoComponent {
   carrinhoItens: any[] = [];
   cliente: any;
   formasDePagamento: FormaPagamento[] = [];
-  formaDePagamentoSelecionada: number = 3;
+  formaDePagamentoSelecionada: number = 0;
   frete: number = 0;
   totalCompra: number = 0;
 
@@ -56,15 +57,24 @@ export class FinalizarPedidoComponent {
 
   atualizarFrete(event: Event): void { 
     const inputElement = event.target as HTMLInputElement; 
-    this.frete = parseFloat(inputElement.value) || 0; this.atualizarTotal(); 
+    this.frete = parseFloat(inputElement.value) || 0; 
+    this.atualizarTotal(); 
   }
 
   finalizarCompra(): void {
-
-    this.pedidoService.insert( this.carrinhoItens, this.formaDePagamentoSelecionada).subscribe(response => {
-      console.log('Pedido enviado com sucesso:', response);
-    }, error => {
-      console.error('Erro ao enviar o pedido:', error);
+    console.log('------------------------------\n\n')
+    console.log(this.formaDePagamentoSelecionada)
+    console.log('\n\n------------------------------')
+    this.pedidoService.insert( this.carrinhoItens, this.formaDePagamentoSelecionada).subscribe({
+      next:(res) => {
+        this.carrinhoService.removerTudo();
+        console.log(res);
+        //this.router.navigateByUrl('/user/pedidofinalizado');
+        window.location.href = '/user/pedidofinalizado';
+      },
+      error: (err) => {
+        console.log('Erro ao Enviar Pedido' + JSON.stringify(err));
+      }
     });
   }
 }

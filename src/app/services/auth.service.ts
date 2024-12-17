@@ -11,7 +11,7 @@ import { Usuario } from '../models/usuario.model';
 export class AuthService {
 
   private baseUrl = 'http://localhost:8080/auth';
-  private cadastroUsuUrl = 'http://localhost:8080/cadastro';
+  
     private tokenKey = 'jwt_token';
     private usuarioLogadoKey = 'usuario_logado';
     private usuarioLogadoSubject = new BehaviorSubject<Usuario|null>(null);
@@ -23,29 +23,32 @@ export class AuthService {
         this.initUsuarioLogado();
     }
 
-    private initUsuarioLogado():void {
-        const usuario = this.localStorageService.getItem(this.usuarioLogadoKey);
-        if (usuario) {
-            // const usuarioLogado = JSON.parse(usuario);
-            this.usuarioLogadoSubject.next(usuario);
-        }
+    private initUsuarioLogado(): void {
+      const usuario = this.localStorageService.getItem(this.usuarioLogadoKey);
+      console.log('Usuario do localStorage:', usuario);
+      if (usuario) {
+        const usuarioLogado = JSON.parse(usuario);
+        console.log('Usuario logado após parse:', usuarioLogado);
+        this.usuarioLogadoSubject.next(usuarioLogado);
+      }
     }
+    
 
     public loginADM(username: string, senha: string): Observable<any> {
-        const params = {
-            login: username,
-            senha: senha,
-            perfil: 2 // ADM
-        }
+      const params = {
+          login: username,
+          senha: senha,
+          perfil: 2 // ADM
+      }
 
-        //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
+      //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
     return this.httpClient.post(`${this.baseUrl}`, params, {observe: 'response'}).pipe(
         tap((res: any) => {
           const authToken = res.headers.get('Authorization') ?? '';
+          console.log(authToken);
           if (authToken) {
             this.setToken(authToken);
             const usuarioLogado = res.body;
-            console.log(usuarioLogado);
             if (usuarioLogado) {
               this.setUsuarioLogado(usuarioLogado);
               this.usuarioLogadoSubject.next(usuarioLogado);
@@ -56,20 +59,23 @@ export class AuthService {
     }
 
     public loginUsuario(username: string, senha: string): Observable<any> {
-        const params = {
+      const params = {
           login: username,
           senha: senha,
           perfil: 1 // user
-        }
+      }
 
-        //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
-    return this.httpClient.post(`${this.cadastroUsuUrl}`, params, {observe: 'response'}).pipe(
+      console.log('--------------------')
+      console.log(params.login);
+
+      //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
+    return this.httpClient.post(`${this.baseUrl}`, params, {observe: 'response'}).pipe(
         tap((res: any) => {
           const authToken = res.headers.get('Authorization') ?? '';
+          console.log(authToken);
           if (authToken) {
             this.setToken(authToken);
             const usuarioLogado = res.body;
-            console.log(usuarioLogado);
             if (usuarioLogado) {
               this.setUsuarioLogado(usuarioLogado);
               this.usuarioLogadoSubject.next(usuarioLogado);
@@ -80,17 +86,18 @@ export class AuthService {
     }
   
     setUsuarioLogado(usuario: Usuario): void {
-      this.localStorageService.setItem(this.usuarioLogadoKey, usuario);
-    }
+      console.log('Setando usuario logado:', usuario);
+      this.localStorageService.setItem(this.usuarioLogadoKey, JSON.stringify(usuario));
+    }    
 
     setToken(token: string): void {
         this.localStorageService.setItem(this.tokenKey, token);
     }
 
-    getUsuarioLogado() {
-      console.log(this.usuarioLogadoSubject.asObservable());
-        return this.usuarioLogadoSubject.asObservable();
+    getUsuarioLogado(): Observable<Usuario | null> {
+      return this.usuarioLogadoSubject.asObservable();
     }
+    
 
     getToken(): string | null {
         return this.localStorageService.getItem(this.tokenKey);

@@ -8,6 +8,7 @@ import { CarrinhoService } from '../../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SidebarComponent } from '../../template/sidebar/sidebar.component';
 import { MatIcon } from '@angular/material/icon';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 type Card = {
   idArma: number,
@@ -21,13 +22,17 @@ type Card = {
   selector: 'app-arma-card-list',
   standalone: true,
   imports: [MatCardModule, MatButtonModule, NgFor, 
-    MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, SidebarComponent, MatIcon],
+    MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, SidebarComponent, MatIcon, MatPaginatorModule],
   templateUrl: './arma-card-list.component.html',
   styleUrl: './arma-card-list.component.css'
 })
 export class ArmaCardListComponent {
   armas: Arma[] = [];
   cards = signal<Card[]>([]);
+
+  totalRecords = 0;
+  pageSize = 30;
+  page = 0;
 
   constructor(private armaService: ArmaService,
               private carrinhoService: CarrinhoService,
@@ -39,9 +44,15 @@ export class ArmaCardListComponent {
     this.carregarArmas();
   }
 
+  paginar(event: PageEvent): void {
+      this.page = event.pageIndex;
+      this.pageSize = event.pageSize;
+      this.ngOnInit();
+    }
+
   carregarArmas() {
     // buscando as armas
-    this.armaService.findAll(0,10).subscribe (data => {
+    this.armaService.findAll(this.page,this.pageSize).subscribe (data => {
       this.armas = data;
       this.carregarCards();
     })

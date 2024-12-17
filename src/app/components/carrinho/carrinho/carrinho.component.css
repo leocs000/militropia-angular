@@ -84,7 +84,7 @@ button{
         padding: 16px;
         width: 100%;
         height: auto;
-        background-color: green;
+        background-color: black;
         color: aliceblue;
         font-weight: 800;
         border-radius: 6px;
@@ -92,7 +92,7 @@ button{
 
     & button:last-child{
         background-color: #fff;
-        color: green;
+        color: black;
     }
   }
   

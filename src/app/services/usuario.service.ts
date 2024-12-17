@@ -8,20 +8,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UsuarioService {
 
-  private baseUrl = 'http://localhost:8080/cadastro';
+  private UsuarioUrl = 'http://localhost:8080/usuariologado/usuariologado';
+  private cadastroUsuUrl = 'http://localhost:8080/cadastro';
 
   constructor(private httpClient: HttpClient) { }
   
-  create(cpf: string, email: string, login: string, senha: string): Observable<Usuario>{
-    const data = {
-      cpf: cpf,
-      email: email,
-      login: login,
-      senha: senha,
-      idPerfil: 1
-    };
-        
-    return this.httpClient.post<Usuario>(this.baseUrl, data);
+  create(usuario: any): Observable<Usuario> { 
+    return this.httpClient.post<Usuario>(this.cadastroUsuUrl, usuario);
+  }
+
+  alterarSenha(senha: string): Observable<string>{
+    return this.httpClient.post<string>(`${this.UsuarioUrl}/alterarsenha`, senha);
+  }
+  alterarlogin(login: string): Observable<string>{
+    return this.httpClient.post<string>(`${this.UsuarioUrl}/alterarlogin`, login);
   }
 
 }

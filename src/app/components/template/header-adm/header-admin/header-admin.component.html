@@ -1,0 +1,30 @@
+<mat-toolbar color="warn">
+    <!-- <button (click)="clickMenu()" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </button>
+    
+    <span>Pipoco Silencioso</span> -->
+
+    <img src="assets/logo2.png" alt="Logo Pipoco" style="height: 50px; padding: 15px; background-color: white;">
+
+    <span class="example-spacer"></span>
+
+    <ng-container  *ngIf="usuarioLogado; else loginButton">
+      <mat-icon>account_circle</mat-icon>
+      <button mat-button [matMenuTriggerFor]="menu" class="text-white">{{ usuarioLogado.login }}</button>
+      <mat-menu #menu="matMenu" class="drop-down">
+        <button mat-menu-item routerLink="/ecommerce">Ir para Loja</button>
+        <button mat-menu-item routerLink="/admin">Area Administrativa</button>
+        <button mat-menu-item (click)="deslogar()">Deslogar</button>
+      </mat-menu>
+    </ng-container>
+    <ng-template #loginButton>
+      <button mat-button (click)="irParaLogin()" class="text-white">Login</button>
+    </ng-template>
+    
+    
+    <!-- <button  mat-icon-button (click)="deslogar()">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <span>{{usuarioLogado?.login}}</span> -->
+</mat-toolbar>

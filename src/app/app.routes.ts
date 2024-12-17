@@ -32,9 +32,12 @@ import { AdminTemplateComponent } from './components/template/admin-template/adm
 import { UserTemplateComponent } from './components/template/user-template/user-template.component';
 import { authGuard } from './guard/auth.guard';
 import { LoginComponent } from './components/login/login/login.component';
-import { LoginUsuarioComponent } from './components/usuario/login-suario/login-usuario.component';
+import { LoginUsuarioComponent } from './components/usuario/login-usuario/login-usuario.component';
 import { CadastroUsuarioComponent } from './components/usuario/cadastro-usuario/cadastro-usuario.component';
 import { FinalizarPedidoComponent } from './components/pedido/finalizar-pedido/finalizar-pedido.component';
+import { PedidoFinalizadoComponent } from './components/pedido/pedido-finalizado/pedido-finalizado/pedido-finalizado.component';
+import { PerfilComponent } from './components/usuario/perfil/perfil/perfil.component';
+import { AlterarSenhaComponent } from './components/usuario/alterar-senha/alterar-senha/alterar-senha.component';
 
 export const routes: Routes = [
     {path: 'tiposarma', component: TipoArmaListComponent, title: 'Listagem dos Tipos de Armas'},
@@ -63,6 +66,10 @@ export const routes: Routes = [
         
             { path: 'carrinho', component: CarrinhoComponent, title: 'Carrinho de Compras', canActivate: [authGuard]},
 
+            { path: 'perfil', component: PerfilComponent, title: 'Perfil do usuário', canActivate: [authGuard]},
+            { path: 'alterarsenha', component: AlterarSenhaComponent, title: 'Alterar Senha', canActivate: [authGuard]},
+            //{ path: 'alterarlogin', component: AlterarLoginComponent, title: 'Alterar Login', canActivate: [authGuard]},
+
             { path: 'enderecos',component: EnderecoListComponent, title: 'Lista de Enderecos'},
             { path: 'enderecos/new',component: EnderecoFormComponent, title: 'Novo Endereco'},
             { path: 'enderecos/edit/:id',component: EnderecoFormComponent, resolve: {endereco: enderecoResolver}},
@@ -70,6 +77,7 @@ export const routes: Routes = [
 //            { path: 'pedidos',component: EnderecoListComponent, title: 'Lista de Enderecos'},
 
             { path: 'finalizarpedido',component: FinalizarPedidoComponent, title: 'Resumo do pedido'},
+            { path: 'pedidofinalizado',component: PedidoFinalizadoComponent, title: 'Obrigado por comprar'},
 
         ]
     },

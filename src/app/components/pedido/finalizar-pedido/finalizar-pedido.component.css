@@ -8,11 +8,14 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
+  #h2{
+    margin-left: 20px;
+  }
+
   .itens-carrinho {
     flex: 3;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 20px;
     background-color: #fff;
     margin-right: 40px;
@@ -63,5 +66,17 @@
     height: 100%;
     font-size: 1.2em;
     color: #888;
+  }
+
+  .finalizarButton{
+    margin-top: 30px;
+    border: none;
+    padding: 16px;
+    width: 100%;
+    height: auto;
+    background-color: black;
+    color: aliceblue;
+    font-weight: 800;
+    border-radius: 6px;
   }
   

@@ -1,0 +1,26 @@
+<div class="confirmacao-container">
+  <div class="confirmacao-box">
+    <img class="confirmacao-icon" src="/icons/success.svg" alt="Success">
+    <h2 class="confirmacao-title">Compra Finalizada com Sucesso!</h2>
+    <p class="confirmacao-mensagem">Obrigado por sua compra. Aqui estão os detalhes do seu pedido:</p>
+    <div class="detalhes-pedido">
+      <h3>Detalhes do Pedido</h3>
+      <p><strong>ID do Pedido:</strong> {{ pedido.id }}</p>
+      <p><strong>Data:</strong> {{ pedido.data }}</p>
+      <p><strong>Total:</strong> {{ pedido.total | currency:'BRL' }}</p>
+      <h3>Itens</h3>
+      <ul>
+        <li *ngFor="let item of pedido.itens">
+          {{ item.quantidade }}x {{ item.nome }} - {{ item.preco | currency:'BRL' }}
+        </li>
+      </ul>
+      <h3>Endereço de Entrega</h3>
+      <p>{{ pedido.endereco.logradouro }}, {{ pedido.endereco.numero }}</p>
+      <p>{{ pedido.endereco.complemento }}</p>
+      <p>{{ pedido.endereco.bairro }}</p>
+      <p>{{ pedido.endereco.cep }}</p>
+      <p>{{ pedido.endereco.cidade }} - {{ pedido.endereco.estado }}</p>
+    </div>
+    <button mat-raised-button color="primary" (click)="voltarParaHome()">Voltar para a Página Inicial</button>
+  </div>
+</div>
